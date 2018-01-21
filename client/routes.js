@@ -4,7 +4,7 @@ import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 import {Main, Login, Signup, UserHome} from './components'
-import {me} from './store'
+import {me, fetchSongs, setCurrentSong} from './store'
 
 /**
  * COMPONENT
@@ -12,6 +12,11 @@ import {me} from './store'
 class Routes extends Component {
   componentDidMount () {
     this.props.loadInitialData()
+    if (this.props.songs.length){
+      this.props.setCurrent(this.props.songs.shift())
+    } else {
+      this.props.setCurrent({name: 'fake song'})
+    }
   }
 
   render () {
@@ -47,7 +52,9 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    current: state.current,
+    songs: state.songs
   }
 }
 
@@ -55,6 +62,10 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
+      dispatch(fetchSongs())
+    },
+    setCurrent(song){
+      dispatch(setCurrentSong(song))
     }
   }
 }
