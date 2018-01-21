@@ -53,7 +53,6 @@ class UserHome extends Component {
       <div>
         <div className="container">
           <div className="container">
-            <h5>Welcome, {email}</h5>
             <h5>Now Playing: </h5>
             <Queue song={current} />
             <div className="toggle">
@@ -70,10 +69,7 @@ class UserHome extends Component {
         </div>
       </div>
     )
-
-
   }
-
 }
 
 /**
