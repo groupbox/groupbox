@@ -4,7 +4,7 @@ import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 import {Main, Login, Signup, UserHome} from './components'
-import {me, fetchSongs, setCurrentSong} from './store'
+import {me, fetchSongs} from './store'
 
 /**
  * COMPONENT
@@ -12,11 +12,6 @@ import {me, fetchSongs, setCurrentSong} from './store'
 class Routes extends Component {
   componentDidMount () {
     this.props.loadInitialData()
-    if (this.props.songs.length){
-      this.props.setCurrent(this.props.songs.shift())
-    } else {
-      this.props.setCurrent({name: 'fake song'})
-    }
   }
 
   render () {
@@ -63,9 +58,6 @@ const mapDispatch = (dispatch) => {
     loadInitialData () {
       dispatch(me())
       dispatch(fetchSongs())
-    },
-    setCurrent(song){
-      dispatch(setCurrentSong(song))
     }
   }
 }

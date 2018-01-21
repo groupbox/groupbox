@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {logout, search} from '../store'
+import {logout} from '../store'
 
 /**
  * COMPONENT
@@ -11,10 +11,11 @@ import {logout, search} from '../store'
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn, handleSearch } = props
+  const {children, handleClick, isLoggedIn } = props
 
   return (
     <div>
+      <div className="container">
       <h1>groupbox</h1>
       <nav>
         {
@@ -23,7 +24,7 @@ const Main = (props) => {
               {/* The navbar will show these links after you log in */}
               <Link to="/home">Home</Link>
               <a href="#" onClick={handleClick}>Logout</a>
-            </div>
+              </div>
             : <div>
               {/* The navbar will show these links before you log in */}
               <Link to="/login">Login</Link>
@@ -31,11 +32,9 @@ const Main = (props) => {
             </div>
         }
       </nav>
+    </div>
       <hr />
       {children}
-      <div>
-        <button onClick={handleSearch} />
-      </div>
     </div>
   )
 }
@@ -53,9 +52,6 @@ const mapDispatch = (dispatch) => {
   return {
     handleClick () {
       dispatch(logout())
-    },
-    handleSearch (){
-      search()
     }
   }
 }
