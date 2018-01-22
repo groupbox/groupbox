@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {vote} from '../store'
 import FlipMove from 'react-flip-move'
@@ -25,7 +24,9 @@ class UserHome extends Component {
   componentDidUpdate(){
     if (this.state.prev !== this.props.current.id){
       this.setState({
-        prev: this.props.current.id
+        prev: this.props.current.id,
+        isPlaying: true,
+        toggle: '❚❚'
       })
       this.props.load(this.props.current)
     }
@@ -38,23 +39,25 @@ class UserHome extends Component {
 
   pause(){
     AUDIO.pause()
-    this.setState({ isPlaying: false, toggle: 'Play' });
+    this.setState({ isPlaying: false, toggle: '►' });
   }
 
   play(){
     AUDIO.play()
-    this.setState({ isPlaying: true, toggle: 'Pause' });
+    this.setState({ isPlaying: true, toggle: '❚❚' });
   }
 
   render(){
-    const {email, songs, current } = this.props
+    const {songs, current } = this.props
 
     return (
       <div>
         <div className="container">
           <div className="container">
-            <h5>Now Playing: </h5>
-            <Queue song={current} />
+            <div className="now-playing">
+              <h5 className="now-playing-text">now playing: </h5>
+              <Queue song={current} />
+            </div>
             <div className="toggle">
               <button onClick={this.toggle}>{this.state.toggle}</button>
             </div>
@@ -104,10 +107,3 @@ const mapDispatch = (dispatch) => {
 }
 
 export default connect(mapState, mapDispatch)(UserHome)
-
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  email: PropTypes.string
-}
