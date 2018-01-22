@@ -1,39 +1,65 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {vote} from '../store'
+import FlipMove from 'react-flip-move'
+import Card from './Card'
+
+const AUDIO = document.createElement('audio');
 
 class Queue extends Component {
+
   constructor(props){
     super(props);
-    this.state = {}
+    this.state = {
+      prev: null,
+      isPlaying: true,
+      toggle: '❚❚'
+    }
+    this.toggle = this.toggle.bind(this);
   }
 
+  componentDidUpdate(){
+    if (this.state.prev !== this.props.current.id){
+      this.setState({
+        prev: this.props.current.id,
+        isPlaying: true,
+        toggle: '❚❚'
+      })
+      // this.props.load(this.props.current)
+    }
+  }
+
+  toggle(){
+    if (this.state.isPlaying) this.pause();
+    else this.play();
+  }
+
+  pause(){
+    AUDIO.pause()
+    this.setState({ isPlaying: false, toggle: '►' });
+  }
+
+  play(){
+    AUDIO.play()
+    this.setState({ isPlaying: true, toggle: '❚❚' });
+  }
   render(){
-    const {song, upvoteSong, downvoteSong} = this.props
+    const { songs, current } = this.props;
+
     return (
-      <div className="card container" key={song.id} >
-        <div className="row">
-          <div className="card-image three columns">
-            <img src="images/abbey-road.jpeg" />
-          </div>
-          <div className="card-artist five columns">
-            <div className="card-artist-song">{ song.name }</div>
-            <div className="card-artist-name">
-              <div>{ song.artists ? song.artists.map(artist => artist.name).join(', ') : null }</div>
-            </div>
-          </div>
-          <div className="card-vote one columns">
-            <div className="card-vote-amt">{ song.vote }</div>
-          </div>
-          <div className="card-control three columns">
-            <div>
-              <button className="card-control-button" onClick={() => upvoteSong(song)}>↑</button>
-            </div>
-            <div>
-              <button className="card-control-button" onClick={() => downvoteSong(song)}>↓</button>
-            </div>
+      <div>
+        <div className="now-playing">
+          <Card song={current} />
+          <div className="toggle">
+            <button onClick={this.toggle}>{this.state.toggle}</button>
           </div>
         </div>
+        <FlipMove duration={750}>
+        {
+          songs.map(song => (
+            <Card key={song.id} song={song} />
+          ))
+        }
+        </FlipMove>
       </div>
     )
   }
@@ -47,15 +73,13 @@ const mapState = (state) => {
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = () => {
   return {
-    upvoteSong (song) {
-      song.vote += 1
-      dispatch(vote(song))
-    },
-    downvoteSong (song) {
-      song.vote -= 1
-      dispatch(vote(song))
+    load(current){
+      AUDIO.src = current.audioUrl
+      AUDIO.load()
+      AUDIO.play()
+      .catch(error => console.error(error))
     }
 
   }
