@@ -36,6 +36,8 @@ h5 {
 
 input {
   color: black;
+  height: 42px;
+  font-size: 30px;
 }
 
 button {
@@ -44,7 +46,7 @@ button {
 
 .main-nav-text {
   font-family: "Raleway";
-  font-size: 22px;
+  font-size: 24px;
   padding-left: 8px;
 }
 
@@ -80,7 +82,6 @@ button {
   box-sizing: border-box;
 }
 
-
 .card button {
   background-color: white;
   color: grey;
@@ -92,6 +93,10 @@ button {
   background-color: lightgrey;
   font-size: 20px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+}
+
+.card button:active {
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2);
 }
 
 .toggle button{

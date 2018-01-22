@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Card from './Card'
-import FlipMove from 'react-flip-move'
 
 class Search extends Component {
   constructor(props){
@@ -27,14 +26,14 @@ render() {
           <div className="row">
             <input className="twelve columns" placeholder="Search music..." onChange={this.handleChange} />
           </div>
-          <FlipMove>
+          <div>
           {
             songs && songs.length ?
             songs.map(song => (
-            <Card key={song.id} song={song} />
+            <Card key={song.id} song={song} type={false} />
             )) : null
           }
-        </FlipMove>
+        </div>
         </div>
     </div>
   )

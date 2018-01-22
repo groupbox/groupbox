@@ -43,20 +43,31 @@ class Queue extends Component {
     this.setState({ isPlaying: true, toggle: '❚❚' });
   }
   render(){
-    const { songs, current } = this.props;
+    const { songs, current, playlist } = this.props;
+
+    function idExists(el, arr){
+      for (var i = 0; i < arr.length; i++){
+        if (arr[i].id === el.id){
+          return true
+        }
+      }
+      return false;
+    }
+
+    const userSongs = songs.filter(song => idExists(song, playlist))
 
     return (
       <div>
         <div className="now-playing">
-          <Card song={current} />
+          <Card song={current} type={true} />
           <div className="toggle">
             <button onClick={this.toggle}>{this.state.toggle}</button>
           </div>
         </div>
         <FlipMove duration={750}>
         {
-          songs.map(song => (
-            <Card key={song.id} song={song} />
+          userSongs.map(song => (
+            <Card key={song.id} song={song} type={true} />
           ))
         }
         </FlipMove>
@@ -69,7 +80,8 @@ const mapState = (state) => {
   return {
     email: state.user.email,
     songs: state.songs,
-    current: state.current
+    current: state.current,
+    playlist: state.playlist
   }
 }
 

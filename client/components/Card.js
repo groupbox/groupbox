@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {vote} from '../store'
+import {vote, addToPlaylist} from '../store'
 
 class Card extends Component {
   constructor(props){
@@ -9,7 +9,7 @@ class Card extends Component {
   }
 
   render(){
-    const {song, upvoteSong, downvoteSong} = this.props
+    const {song, upvoteSong, downvoteSong, type, addSong} = this.props
     return (
       <div className="card container" key={song.id} >
         <div className="row">
@@ -25,14 +25,24 @@ class Card extends Component {
           <div className="card-vote one columns">
             <div className="card-vote-amt">{ song.vote }</div>
           </div>
-          <div className="card-control three columns">
-            <div>
-              <button className="card-control-button" onClick={() => upvoteSong(song)}>↑</button>
-            </div>
-            <div>
-              <button className="card-control-button" onClick={() => downvoteSong(song)}>↓</button>
-            </div>
-          </div>
+          {
+            type ? (
+              <div className="card-control three columns">
+                <div>
+                  <button className="card-control-button" onClick={() => upvoteSong(song)}>↑</button>
+                </div>
+                <div>
+                  <button className="card-control-button" onClick={() => downvoteSong(song)}>↓</button>
+                </div>
+              </div>
+            ) : (
+              <div className="card-control three columns">
+                <div>
+                  <button className="card-control-button-add" onClick={(evt) => addSong(song, evt)}>+</button>
+                </div>
+              </div>
+            )
+          }
         </div>
       </div>
     )
@@ -56,8 +66,11 @@ const mapDispatch = (dispatch) => {
     downvoteSong (song) {
       song.vote -= 1
       dispatch(vote(song))
+    },
+    addSong(song, evt) {
+      evt.target.innerHTML =  '✔'
+      dispatch(addToPlaylist(song))
     }
-
   }
 }
 
