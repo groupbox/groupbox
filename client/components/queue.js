@@ -24,7 +24,7 @@ class Queue extends Component {
         isPlaying: true,
         toggle: '❚❚'
       })
-      // this.props.load(this.props.current)
+      this.props.load(this.props.current)
     }
   }
 
