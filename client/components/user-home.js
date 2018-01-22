@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-// import {vote} from '../store'
 import Queue from './Queue'
 import Search from './Search'
-// import { NavLink, Switch, Router } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 /**
  * COMPONENT
@@ -12,16 +11,16 @@ class UserHome extends Component {
   constructor(props){
     super(props)
     this.state = {
-      view: 'Queue'
+      view: true
     }
     this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick(evt){
-    if (evt.target.name === 'now playing: '){
-      this.setState({view: 'Queue'})
-    } else if (evt.target.name === 'search: '){
-      this.setState({view: 'Search'})
+    if (evt.target.innerHTML === 'now playing: '){
+      this.setState({view: true})
+    } else if (evt.target.innerHTML === 'search: '){
+      this.setState({view: false})
     }
   }
 
@@ -33,15 +32,18 @@ class UserHome extends Component {
           <div className="container">
             <div className="main-nav">
               <div className="row">
-                <h5 onClick={this.handleClick} name="queue" className="main-nav-text nine columns">now playing: </h5>
-                <h5 onClick={this.handleClick} name="search" className="main-nav-text three columns">search: </h5>
+                <NavLink to="/home">
+                  <h5 onClick={this.handleClick} className="main-nav-text nine columns">now playing: </h5>
+                </NavLink>
+                <NavLink to="/home">
+                  <h5 onClick={this.handleClick} className="main-nav-text three columns">search: </h5>
+                </NavLink>
               </div>
             </div>
             {
-              this.state.view === 'Queue' ?
-              <Queue /> : <Search />
+              this.state.view ?
+              ( <Queue /> ) : ( <Search /> )
             }
-            <Search />
           </div>
         </div>
       </div>
