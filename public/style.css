@@ -42,10 +42,17 @@ button {
   margin: 1rem;
 }
 
-.now-playing-text {
+.main-nav-text {
   font-family: "Raleway";
   font-size: 22px;
   padding-left: 8px;
+}
+
+.now-playing {
+  background-color: #4b4d4f;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
 }
 
 
@@ -91,6 +98,7 @@ button {
   background-color: white;
   color: grey;
   font-size: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
 }
 
 .nav-container {

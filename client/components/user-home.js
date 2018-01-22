@@ -1,73 +1,47 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {vote} from '../store'
-import FlipMove from 'react-flip-move'
-import Queue from './queue'
-
-const AUDIO = document.createElement('audio');
+// import {vote} from '../store'
+import Queue from './Queue'
+import Search from './Search'
+// import { NavLink, Switch, Router } from 'react-router-dom'
 
 /**
  * COMPONENT
  */
 class UserHome extends Component {
-
   constructor(props){
-    super(props);
+    super(props)
     this.state = {
-      prev: null,
-      isPlaying: true,
-      toggle: 'Pause'
+      view: 'Queue'
     }
-    this.toggle = this.toggle.bind(this);
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  componentDidUpdate(){
-    if (this.state.prev !== this.props.current.id){
-      this.setState({
-        prev: this.props.current.id,
-        isPlaying: true,
-        toggle: '❚❚'
-      })
-      this.props.load(this.props.current)
+  handleClick(evt){
+    if (evt.target.name === 'now playing: '){
+      this.setState({view: 'Queue'})
+    } else if (evt.target.name === 'search: '){
+      this.setState({view: 'Search'})
     }
-  }
-
-  toggle(){
-    if (this.state.isPlaying) this.pause();
-    else this.play();
-  }
-
-  pause(){
-    AUDIO.pause()
-    this.setState({ isPlaying: false, toggle: '►' });
-  }
-
-  play(){
-    AUDIO.play()
-    this.setState({ isPlaying: true, toggle: '❚❚' });
   }
 
   render(){
-    const {songs, current } = this.props
 
     return (
       <div>
         <div className="container">
           <div className="container">
-            <div className="now-playing">
-              <h5 className="now-playing-text">now playing: </h5>
-              <Queue song={current} />
+            <div className="main-nav">
+              <div className="row">
+                <h5 onClick={this.handleClick} name="queue" className="main-nav-text nine columns">now playing: </h5>
+                <h5 onClick={this.handleClick} name="search" className="main-nav-text three columns">search: </h5>
+              </div>
             </div>
-            <div className="toggle">
-              <button onClick={this.toggle}>{this.state.toggle}</button>
-            </div>
-            <FlipMove duration={750}>
-              {
-                songs.map(song => (
-                <Queue key={song.id} song={song} />
-                ))
-              }
-            </FlipMove>
+            {
+              this.state.view === 'Queue' ?
+              <Queue /> : <Search />
+            }
+            <Search />
           </div>
         </div>
       </div>
@@ -86,24 +60,6 @@ const mapState = (state) => {
   }
 }
 
-const mapDispatch = (dispatch) => {
-  return {
-    upvoteSong (song) {
-      song.vote += 1
-      dispatch(vote(song))
-    },
-    downvoteSong (song) {
-      song.vote -= 1
-      dispatch(vote(song))
-    },
-    load(current){
-      AUDIO.src = current.audioUrl
-      AUDIO.load()
-      AUDIO.play()
-      .catch(error => console.error(error))
-    }
-
-  }
-}
+const mapDispatch = null
 
 export default connect(mapState, mapDispatch)(UserHome)
