@@ -2,7 +2,7 @@
 'use strict';
 const express = require('express')
 const router = express.Router();
-const {Song, Artist} = require('../db/models')
+const {Song, Artist, Album} = require('../db/models')
 const mime = require('mime');
 // const chalk = require('chalk');
 const urlParse = require('url').parse;
@@ -15,7 +15,10 @@ const fs = require('fs')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  Song.findAll({include: [{model: Artist}]})
+  Song.findAll({include: [
+    {model: Artist},
+    {model: Album}
+  ]})
   .then(songs => res.json(songs))
   .catch(next)
 })

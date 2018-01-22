@@ -5,8 +5,9 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user'
 import songs from './songs'
 import current from './current'
+import playlist from './playlist'
 
-const reducer = combineReducers({user, songs, current})
+const reducer = combineReducers({user, songs, current, playlist})
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
@@ -18,3 +19,4 @@ export * from './user'
 export * from './songs'
 export * from './search'
 export * from './current'
+export * from './playlist'
