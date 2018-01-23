@@ -1,7 +1,7 @@
 {
   "name": "groupbox",
   "version": "1.0.0",
-  "description": "My Stackathon project: a democratic, digital jukebox",
+  "description": "Capstone project: a collaborative, digital jukebox",
   "engines": {
     "node": ">= 7.0.0"
   },
