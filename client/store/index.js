@@ -6,8 +6,9 @@ import user from './user'
 import songs from './songs'
 import current from './current'
 import playlist from './playlist'
+import search from './search'
 
-const reducer = combineReducers({user, songs, current, playlist})
+const reducer = combineReducers({user, songs, current, playlist, search})
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
