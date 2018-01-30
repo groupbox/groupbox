@@ -19,7 +19,8 @@ class Search extends Component {
   }
 
     handleChange(event) {
-      this.props.loadSearchResult(event.target.value.toLowerCase());
+      if( event.target.value.toLowerCase() )
+        this.props.loadSearchResult(event.target.value.toLowerCase());
     }
 
   render() {

@@ -1,9 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import FlipMove from 'react-flip-move'
+import axios from 'axios'
+
 import Card from './Card'
+import store, {addVideoLinkDispatch} from '../store'
+import VideoPlayer from './VideoPlayer'
 
 const AUDIO = document.createElement('audio');
+const con = console.log;
 
 class Queue extends Component {
 
@@ -24,7 +29,7 @@ class Queue extends Component {
         isPlaying: true,
         toggle: '❚❚'
       })
-      this.props.load(this.props.current)
+      //this.props.load(this.props.current)
     }
   }
 
@@ -42,8 +47,15 @@ class Queue extends Component {
     AUDIO.play()
     this.setState({ isPlaying: true, toggle: '❚❚' });
   }
+
+  // addLinkToQ(event){
+  //   event.preventDefault();
+  //   if( event.target.addlinktoqueue.value.toLowerCase() )
+  //     con('qqqqqqqqqqqqq')
+  // }
+
   render(){
-    const { songs, current, playlist } = this.props;
+    const { songs, current, playlist, addLinkToQ, videos } = this.props;
 
     function idExists(el, arr){
       for (var i = 0; i < arr.length; i++){
@@ -58,16 +70,21 @@ class Queue extends Component {
 
     return (
       <div>
-        <div className="now-playing">
-          <Card song={current} type={true} />
-          <div className="toggle">
-            <button onClick={this.toggle}>{this.state.toggle}</button>
-          </div>
+
+        <form onSubmit={(event) => addLinkToQ(event)} className="row">
+          <input name="addlinktoqueue" className="ten columns" placeholder="Paste link here..."  />
+          <button type="submit" >Add</button>
+        </form>
+
+        <div>
+          <VideoPlayer />
         </div>
+
+
         <FlipMove duration={750}>
         {
-          userSongs.map(song => (
-            <Card key={song.id} song={song} type={true} />
+          videos.map((video, idx) => (
+            <Card key={idx} video={video} type={true} />
           ))
         }
         </FlipMove>
@@ -81,19 +98,27 @@ const mapState = (state) => {
     email: state.user.email,
     songs: state.songs,
     current: state.current,
-    playlist: state.playlist
+    playlist: state.playlist,
+    videos: state.videos
   }
 }
 
-const mapDispatch = () => {
+const mapDispatch = (dispatch) => {
   return {
     load(current){
       AUDIO.src = current.audioUrl
       AUDIO.load()
       AUDIO.play()
       .catch(error => console.error(error))
+    },
+    addLinkToQ(event){
+      event.preventDefault();
+      if( event.target.addlinktoqueue.value )
+      {
+        dispatch(addVideoLinkDispatch(event.target.addlinktoqueue.value))
+      }
+        
     }
-
   }
 }
 
