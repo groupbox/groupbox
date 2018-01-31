@@ -7,4 +7,14 @@ router.post('/', (req, res, next) => {
   .catch(next)
 })
 
+router.get('/:id', (req, res, next) => {
+  Video.findAll({
+    where: {
+      roomId: req.params.id
+    }
+  })
+  .then(videos => res.json(videos))
+  .catch(next)
+})
+
 module.exports = router

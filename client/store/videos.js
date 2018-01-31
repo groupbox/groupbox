@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const ADD_VIDEO_LINK = 'ADD_VIDEO_LINK'
 const REMOVE_FIRST_VIDEO = 'REMOVE_FIRST_VIDEO'
+const GET_VIDEOS = 'GET_VIDEOS'
 
 //ACTIONS
 export const addVideoLinkAction = function(videoObj){
@@ -12,6 +13,12 @@ export const addVideoLinkAction = function(videoObj){
     }
 }
 
+export const getVideos = function(videos){
+    return {
+        type: GET_VIDEOS,
+        videos
+    }
+}
 
 //DISPATCHER
 export function addVideoLinkDispatch(videoLink){
@@ -33,10 +40,19 @@ export function addVideoLinkDispatch(videoLink){
         })
         .then(res => dispatch(addVideoLinkAction(res.data)))
         .catch(error => console.log(error))
-        .catch(error => console.log(error))
     }
 }
 
+export function fetchVideos (roomId) {
+    return function thunk(dispatch) {
+        axios.get(`/api/video/${roomId}`)
+            .then(res => res.data)
+            .then(videos => {
+                dispatch(getVideos(videos))
+            })
+            .catch(error => console.log(error))
+    }
+}
 
 //REDUCER
 export default function videosReducer(state = [], action){
@@ -45,6 +61,8 @@ export default function videosReducer(state = [], action){
             return [...state, action.videoObj];
         case REMOVE_FIRST_VIDEO:
             return state.slice(1)
+        case GET_VIDEOS:
+            return action.videos
         default:
             return state;
     }
