@@ -15,6 +15,10 @@ class Queue extends Component {
     }
   }
 
+  componentDidMount() {
+    // what is roomId?
+    this.props.getVideos() // <-- roomId goes there
+  }
 
   render(){
     const { addLinkToQueue, videos } = this.props;
@@ -67,6 +71,9 @@ const mapDispatch = (dispatch) => {
         }
       }
 
+    },
+    getVideos(roomId) {
+      dispatch(fetchVideos(roomId))
     }
   }
 }
