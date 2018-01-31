@@ -8,7 +8,7 @@ import axios from 'axios'
  let initialRooms = []
 
  export const fetchRooms = () =>
-   dispatch => {
+ dispatch => {
     axios.get('/api/rooms')
     .then(res => {
       dispatch(getRooms(res.data || initialRooms))
