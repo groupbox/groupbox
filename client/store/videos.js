@@ -38,7 +38,6 @@ export function addVideoLinkDispatch(videoLink){
 }
 
 
-
 //REDUCER
 export default function videosReducer(state = [], action){
     switch (action.type){

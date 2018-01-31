@@ -16,11 +16,7 @@ router.post('/', (req, res, next) => {
 })
 
 router.get('/:id', (req, res, next) => {
-  Room.findOne({
-    where: {
-      id: req.params.id
-    }
-    })
+  Room.findById(req.params.id)
     .then(room => res.json(room))
     .catch(next)
 })
