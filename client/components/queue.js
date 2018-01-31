@@ -117,7 +117,7 @@ const mapDispatch = (dispatch) => {
       {
         dispatch(addVideoLinkDispatch(event.target.addlinktoqueue.value))
       }
-        
+
     }
   }
 }

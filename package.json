@@ -61,6 +61,7 @@
     "spotify-web-api-node": "^2.5.0",
     "url": "^0.11.0",
     "userhome": "^1.0.0",
+    "youtube-id": "^1.0.0",
     "youtube-info": "^1.1.3"
   },
   "devDependencies": {
