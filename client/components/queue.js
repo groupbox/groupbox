@@ -4,7 +4,7 @@ import FlipMove from 'react-flip-move'
 import axios from 'axios'
 
 import Card from './Card'
-import store, {addVideoLinkDispatch} from '../store'
+import store, {addVideoLinkDispatch, setCurrentVideo} from '../store'
 import VideoPlayer from './VideoPlayer'
 
 const AUDIO = document.createElement('audio');
@@ -109,7 +109,11 @@ const mapDispatch = (dispatch) => {
       event.preventDefault();
       if( event.target.addlinktoqueue.value )
       {
-        dispatch(addVideoLinkDispatch(event.target.addlinktoqueue.value))
+        let url = event.target.addlinktoqueue.value;
+        if( store.getState().videos.length === 0 && store.getState().current === '' )
+          dispatch(setCurrentVideo(url.substring(url.indexOf('?v=')+3))) ////////need to change this videoId parsing
+        else
+          dispatch(addVideoLinkDispatch(event.target.addlinktoqueue.value))
         event.target.addlinktoqueue.value = "";
       }
 
