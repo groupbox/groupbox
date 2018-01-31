@@ -10,7 +10,7 @@ class Card extends Component {
 
   render(){
     const {video, upvoteSong, downvoteSong, type, addSong} = this.props
-    console.log('qqqqqqqqqqqqqqqqqq', video);
+
     let title;
     if( typeof video === 'undefined' ) title = ''
     else title = video.title;

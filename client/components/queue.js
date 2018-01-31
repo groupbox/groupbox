@@ -48,12 +48,6 @@ class Queue extends Component {
     this.setState({ isPlaying: true, toggle: '❚❚' });
   }
 
-  // addLinkToQ(event){
-  //   event.preventDefault();
-  //   if( event.target.addlinktoqueue.value.toLowerCase() )
-  //     con('qqqqqqqqqqqqq')
-  // }
-
   render(){
     const { songs, current, playlist, addLinkToQ, videos } = this.props;
 
@@ -116,6 +110,7 @@ const mapDispatch = (dispatch) => {
       if( event.target.addlinktoqueue.value )
       {
         dispatch(addVideoLinkDispatch(event.target.addlinktoqueue.value))
+        event.target.addlinktoqueue.value = "";
       }
         
     }
