@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, Search, Test} from './components'
-import {me, fetchSongs} from './store'
+import {Main, Login, Signup, UserHome, Search, Test, AllRooms, Queue} from './components'
+import {me} from './store'
 
 /**
  * COMPONENT
@@ -26,6 +26,8 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/search" component={Search} />
+            <Route exact path="/rooms" component={AllRooms} />
+            <Route path="/rooms/:id" component={Queue} />
             {
               isLoggedIn &&
                 <Switch>
@@ -60,7 +62,6 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
-      dispatch(fetchSongs())
     }
   }
 }

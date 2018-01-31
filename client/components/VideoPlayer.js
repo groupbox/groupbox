@@ -14,7 +14,7 @@ class VideoPlayer extends Component {
   }
 
     playNext(){
-        if(this.props.videos.length > 0)
+        if (this.props.videos.length > 0)
         {
             this.props.removeFirstVideo(this.props.videos[0].videoId);
         }
