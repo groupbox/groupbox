@@ -11,29 +11,29 @@ class Card extends Component {
   render(){
     const {video, upvoteSong, downvoteSong, type, addSong} = this.props
 
-    let title;
-    if( typeof video === 'undefined' ) title = ''
-    else title = video.title;
-
-    let thumbnail_url;
-    if( typeof video === 'undefined' ) thumbnail_url = ''
-    else thumbnail_url = video.thumbnail_url;
+    // let title;
+    // if( typeof video === 'undefined' ) title = ''
+    // else title = video.title;
+    //
+    // let thumbnail_url;
+    // if( typeof video === 'undefined' ) thumbnail_url = ''
+    // else thumbnail_url = video.thumbnail;
 
 
     return (
       <div className="card container" >
         <div className="row">
           <div className="card-image three columns">
-            <img src={thumbnail_url} />
+            <img src={video.thumbnail || null} />
           </div>
           <div className="card-artist five columns">
-            <div className="card-artist-song">{title}</div>
+            <div className="card-artist-song">{video.title || null}</div>
             <div className="card-artist-name">
-              <div>video poster XXXXX</div>
+              <div>{video.author || null}</div>
             </div>
           </div>
           <div className="card-vote one columns">
-            <div className="card-vote-amt">vote XXXXX</div>
+            <div className="card-vote-amt">{video.vote}</div>
           </div>
           {
             type ? (

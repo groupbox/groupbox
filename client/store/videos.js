@@ -31,7 +31,7 @@ export function addVideoLinkDispatch(videoLink){
           videoObj.videoId = url;
           return axios.post('/api/video', videoObj)
         })
-        .then(createdVideo => dispatch(addVideoLinkAction(createdVideo)))
+        .then(res => dispatch(addVideoLinkAction(res.data)))
         .catch(error => console.log(error))
         .catch(error => console.log(error))
     }
