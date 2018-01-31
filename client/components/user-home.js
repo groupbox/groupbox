@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import Queue from './Queue'
 import Search from './Search'
 import {NavLink} from 'react-router-dom'
+import {fetchRoom} from '../store'
 
 /**
  * COMPONENT
@@ -10,18 +11,11 @@ import {NavLink} from 'react-router-dom'
 class UserHome extends Component {
   constructor(props){
     super(props)
-    this.state = {
-      view: true
-    }
-    this.handleClick = this.handleClick.bind(this)
+    this.state = {}
   }
 
-  handleClick(evt){
-    if (evt.target.innerHTML === 'now playing: '){
-      this.setState({view: true})
-    } else if (evt.target.innerHTML === 'search: '){
-      this.setState({view: false})
-    }
+  componentDidMount(){
+    this.props.fetchCurrentRoom(this.props.match.params.id)
   }
 
   render(){
@@ -32,18 +26,10 @@ class UserHome extends Component {
           <div className="container">
             <div className="main-nav">
               <div className="row">
-                <NavLink to="/home">
-                  <h5 onClick={this.handleClick} className="main-nav-text nine columns">now playing: </h5>
-                </NavLink>
-                <NavLink to="/home">
-                  <h5 onClick={this.handleClick} className="main-nav-text three columns">search: </h5>
-                </NavLink>
+                <h5 onClick={this.handleClick} className="main-nav-text nine columns">now playing: </h5>
               </div>
             </div>
-            {
-              this.state.view ?
-              ( <Queue /> ) : ( <Search /> )
-            }
+            <Queue />
           </div>
         </div>
       </div>
@@ -62,6 +48,12 @@ const mapState = (state) => {
   }
 }
 
-const mapDispatch = null
+const mapDispatch = (dispatch) => {
+  return {
+    fetchCurrentRoom(id){
+      dispatch(fetchRoom(id))
+    }
+  }
+}
 
 export default connect(mapState, mapDispatch)(UserHome)
