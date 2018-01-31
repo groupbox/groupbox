@@ -4,7 +4,14 @@ const Artist = require('./artist');
 const Album = require('./album');
 const Song = require('./song');
 const Playlist = require('./playlist');
+const Room = require('./room');
 const Video = require('./video');
+
+Room.hasMany(Song);
+Song.belongsTo(Room);
+
+Room.hasMany(User);
+User.belongsToMany(Room, { through: 'userRoom' });
 
 Song.belongsTo(Album);
 Album.hasMany(Song);
@@ -25,5 +32,6 @@ module.exports = {
   Artist,
   Song,
   User,
+  Room,
   Video
 };

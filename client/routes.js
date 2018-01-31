@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, Search, Test} from './components'
+import {Main, Login, Signup, UserHome, Search, Test, AllRooms, VideoPlayer} from './components'
 import {me, fetchSongs} from './store'
 
 /**
@@ -26,6 +26,8 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/search" component={Search} />
+            <Route exact path="/rooms" component={AllRooms} />
+            <Route path="/rooms/:id" component={VideoPlayer} />
             {
               isLoggedIn &&
                 <Switch>
