@@ -14,17 +14,11 @@ class VideoPlayer extends Component {
     this.playNext = this.playNext.bind(this);
   }
 
-  componentDidMount(){
-      this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
-  }
-
-
     playNext(){
         if(this.props.videos.length > 0)
         {
             this.videoId = this.props.videos[0].videoId;
             this.props.removeFirstVideo()
-            this.setState(store.getState());
         }
     }
 
@@ -53,7 +47,8 @@ class VideoPlayer extends Component {
 
 const mapState = (state) => {
     return {
-      videos: state.videos
+        current: state.current,
+        videos: state.videos
     }
   }
 
