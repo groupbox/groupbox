@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, Search, Test, AllRooms, VideoPlayer, Queue} from './components'
-import {me, fetchSongs} from './store'
+import {Main, Login, Signup, UserHome, Search, Test, AllRooms, Queue} from './components'
+import {me} from './store'
 
 /**
  * COMPONENT
@@ -62,7 +62,6 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
-      dispatch(fetchSongs())
     }
   }
 }
