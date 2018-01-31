@@ -44,10 +44,7 @@ export default function videosReducer(state = [], action){
         case ADD_VIDEO_LINK:
             return [...state, action.videoObj];
         case REMOVE_FIRST_VIDEO:
-            console.log('state before shift: ', state)
-            state.shift();
-            console.log('state after shift: ', state)
-            return state;
+            return state.slice(1)
         default:
             return state;
     }

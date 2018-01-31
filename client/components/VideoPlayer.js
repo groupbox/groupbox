@@ -14,18 +14,12 @@ class VideoPlayer extends Component {
     this.playNext = this.playNext.bind(this);
   }
 
-  componentDidMount(){
-      //this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
-  }
-
-
     playNext(){
         if(this.props.videos.length > 0)
         {
             this.videoId = this.props.videos[0].videoId;
             this.props.removeFirstVideo()
         }
-        con('aaaaaaaaaaaaaaaa', this.videoId)
     }
 
     render(){
@@ -35,7 +29,7 @@ class VideoPlayer extends Component {
         const opts = {
             height: '390',
             width: '640',
-            playerVars: { // https://developers.google.com/youtube/player_parameters
+            playerVars: {
               autoplay: 1
             }
           };
@@ -53,11 +47,8 @@ class VideoPlayer extends Component {
 
 const mapState = (state) => {
     return {
-      email: state.user.email,
-      songs: state.songs,
-      current: state.current,
-      playlist: state.playlist,
-      videos: state.videos
+        current: state.current,
+        videos: state.videos
     }
   }
 
