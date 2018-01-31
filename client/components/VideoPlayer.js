@@ -15,7 +15,7 @@ class VideoPlayer extends Component {
   }
 
     playNext(){
-        if(this.props.videos.length > 0)
+        if (this.props.videos.length > 0)
         {
             this.videoId = this.props.videos[0].videoId;
             this.props.removeFirstVideo()
@@ -23,9 +23,8 @@ class VideoPlayer extends Component {
     }
 
     render(){
-        const {videos} = this.props
+        const { videos } = this.props
 
-        con('renderinnnnnnnnnnng', this.videoId)
         const opts = {
             height: '390',
             width: '640',

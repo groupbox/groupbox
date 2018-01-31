@@ -25,13 +25,14 @@ export function addVideoLinkDispatch(videoLink){
         axios.get(proxy + oembed + url)
         .then(response => {
           let data = response.data;
-          videoObj.author_name = data.author_name;
+          videoObj.author = data.author_name;
           videoObj.title = data.title;
-          videoObj.thumbnail_url = data.thumbnail_url;
-          videoObj.url = url;
-          videoObj.videoId = url.substring(url.indexOf('?v=')+3);
+          videoObj.thumbnail = data.thumbnail_url;
+          videoObj.videoId = url;
+          return axios.post('/api/video', videoObj)
         })
-        .then(() => dispatch(addVideoLinkAction(videoObj)))
+        .then(createdVideo => dispatch(addVideoLinkAction(createdVideo)))
+        .catch(error => console.log(error))
         .catch(error => console.log(error))
     }
 }
@@ -40,7 +41,7 @@ export function addVideoLinkDispatch(videoLink){
 
 //REDUCER
 export default function videosReducer(state = [], action){
-    switch(action.type){
+    switch (action.type){
         case ADD_VIDEO_LINK:
             return [...state, action.videoObj];
         case REMOVE_FIRST_VIDEO:
