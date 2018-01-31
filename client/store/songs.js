@@ -7,9 +7,7 @@ const UPDATE_SONG = 'UPDATE_SONG'
 const getSongs = songs => ({type: GET_SONGS, songs})
 const updateSong = song => ({type: UPDATE_SONG, song})
 
-
 const initialSongs = []
-
 
 export const fetchSongs = () =>
   dispatch =>

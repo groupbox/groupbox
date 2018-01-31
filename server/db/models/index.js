@@ -4,6 +4,7 @@ const Artist = require('./artist');
 const Album = require('./album');
 const Song = require('./song');
 const Playlist = require('./playlist');
+const Video = require('./video');
 
 Song.belongsTo(Album);
 Album.hasMany(Song);
@@ -23,5 +24,6 @@ module.exports = {
   Album,
   Artist,
   Song,
-  User
+  User,
+  Video
 };
