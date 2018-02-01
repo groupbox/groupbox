@@ -60,6 +60,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     vote(video, direction) {
+      console.log('updateVote!!!!!!!!!!')
       dispatch(updateVote(video, direction))
     }
   }
