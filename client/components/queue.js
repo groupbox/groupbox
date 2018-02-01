@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import FlipMove from 'react-flip-move'
 
 import Card from './Card'
-import store, {addVideoLinkDispatch, setCurrentVideo} from '../store'
+import {addNewVideo, fetchVideos} from '../store'
 import VideoPlayer from './VideoPlayer'
 
 class Queue extends Component {
@@ -16,12 +16,12 @@ class Queue extends Component {
   }
 
   render(){
-    const { addLinkToQueue, videos } = this.props;
+    const { addLinkToQueue, videos, currentRoom } = this.props;
 
     return (
       <div>
 
-        <form onSubmit={(event) => addLinkToQueue(event)} className="row">
+        <form onSubmit={(event) => addLinkToQueue(event, currentRoom, videos)} className="row">
           <input name="input" className="ten columns" placeholder="Paste link here..."  />
           <button type="submit">Add</button>
         </form>
@@ -44,27 +44,19 @@ class Queue extends Component {
 const mapState = (state) => {
   return {
     email: state.user.email,
-    videos: state.videos
+    videos: state.videos,
+    currentRoom: state.currentRoom
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    addLinkToQueue(event){
+    addLinkToQueue(event, currentRoom, videos){
       event.preventDefault();
-      if ( event.target.input.value )
-      {
-        let url = event.target.input.value;
-        if ( store.getState().videos.length === 0 && store.getState().current === '' ){
-          dispatch(setCurrentVideo(url.substring(url.indexOf('?v=') + 3)))
-          event.target.input.value = '';
-        } else {
-          dispatch(addVideoLinkDispatch(event.target.input.value))
-          event.target.input.value = '';
-        }
+      let first = videos.length
+      dispatch(addNewVideo(event.target.input.value, currentRoom.id, first))
+      event.target.input.value = '';
       }
-
-    },
   }
 }
 

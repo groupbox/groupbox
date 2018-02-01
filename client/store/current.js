@@ -1,6 +1,6 @@
 import socket from '../socket';
+import {updateVideo} from './videos'
 
-const SET_CURRENT = 'SET_CURRENT'
 const SET_CURRENT_VIDEO = 'SET_CURRENT_VIDEO'
 
 export const setCurrentVideoAction = function(videoId){
