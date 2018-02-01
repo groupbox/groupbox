@@ -12,7 +12,7 @@ const Main = (props) => {
       <div className="container">
       <Link to={'/rooms'}>
 
-      <div class="knockout">groupbox</div>
+      <div className="knockout">groupbox</div>
       </Link>
 
       <hr />

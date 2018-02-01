@@ -21,14 +21,14 @@ class Queue extends Component {
 
     return (
       <div className="container">
+        <div className="container" id="videoplayer">
+          <VideoPlayer />
+        </div>
+
         <form onSubmit={(event) => addLinkToQueue(event)} className="row" id="searchbar">
           <input id="videosearchinput" name="input" className="ten columns" placeholder="Paste link here..."  />
           <button id="add-video-button" type="submit">Add</button>
         </form>
-
-        <div className="container">
-          <VideoPlayer />
-        </div>
         <div>
         <FlipMove duration={750}>
         {

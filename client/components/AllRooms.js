@@ -12,21 +12,22 @@ import {Link} from 'react-router-dom'
     const { rooms, newRoomEntry, handleSubmit, handleChange } = this.props;
      return (
       <div id="room-box">
-        <form className="room-box-child" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Create a Room</label>
+        <form onSubmit={handleSubmit} className="room-box-child">
+          <div className="form-group" id="create-room-box">
+            <label htmlFor="name" className="create-room-child">Create a Room :</label>
             <input
               value={newRoomEntry}
               onChange={handleChange}
-              className="form-control"
               type="text"
+              className="create-room-child"
               name="roomName"
               placeholder="Enter room name"
             />
+            <div className="form-group" className="create-room-child" id="create-room-button">
+              <button type="submit" className="btn btn-default">Create Room</button>
+            </div>
           </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-default">Create Room</button>
-          </div>
+
         </form>
           {
             rooms.map((room) => {
