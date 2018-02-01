@@ -17,7 +17,6 @@ class Queue extends Component {
 
   render(){
     const { addLinkToQueue, videos } = this.props;
-    console.log(this.props);
 
     return (
       <div className="container">
