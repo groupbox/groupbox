@@ -21,7 +21,8 @@ export const setCurrentVideo = (video) => {
 export default function (state = '', action){
   switch (action.type) {
     case SET_CURRENT_VIDEO:
-      return action.videoId || state
+      //return action.videoId || state
+      return action.videoId || ''
     default:
       return state
   }
