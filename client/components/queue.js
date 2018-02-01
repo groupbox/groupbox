@@ -20,8 +20,7 @@ class Queue extends Component {
   }
 
   render(){
-    const { current, addLinkToQueue, videos } = this.props;
-
+    const { addLinkToQueue, videos } = this.props;
     return (
       <div>
 

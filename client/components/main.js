@@ -18,7 +18,10 @@ const Main = (props) => {
   return (
     <div>
       <div className="container">
+      <Link to={'/rooms'}>
       <h1>groupbox</h1>
+      </Link>
+
       <hr />
       <nav>
         {
@@ -29,7 +32,7 @@ const Main = (props) => {
                     <h5>Welcome, {email}</h5>
                   </div>
                   <div className="nav-links">
-                    <Link to="/home">Home</Link>
+                    <Link to="/rooms">Rooms</Link>
                     <a href="#" onClick={handleClick}>Logout</a>
                   </div>
               </div>
