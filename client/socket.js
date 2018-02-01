@@ -1,5 +1,5 @@
 import io from 'socket.io-client'
-import store, {addVideoLinkAction} from './store'
+import store, {addVideoLinkAction, fetchVideos} from './store'
 
 const socket = io(window.location.origin)
 
@@ -12,6 +12,10 @@ socket.on('connect', () => {
 
   socket.on('first-current-video', videoId => {
     store.dispatch(setCurrentVideoAction(videoId))
+  })
+
+  socket.on('vote-updte', (roomId) => {
+    store.dispatch(fetchVideos(roomId))
   })
 
 });
