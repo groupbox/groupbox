@@ -12,7 +12,7 @@ class Card extends Component {
     const {video, type, vote} = this.props
 
     return (
-      <div className="card container" >
+      <div className="card container">
         <div className="row">
           <div className="card-image three columns">
             <img src={video.thumbnail || null} />

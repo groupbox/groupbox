@@ -1,7 +1,11 @@
 body {
-  font-family: sans-serif;
+  font-family: "Raleway";
   background-color: #232426;
   color: white;
+}
+
+#logo {
+  font-size: 3.5em;
 }
 
 a {
@@ -27,7 +31,7 @@ hr {
 }
 
 h1 {
-  font-size: 2.5em;
+  font-size: 2em;
   text-align: center;
   margin-top: 2rem;
 }
@@ -70,9 +74,10 @@ button {
 }
 
 .card-artist-song {
-  font-size: 18px;
+  font-size: 1.5em;
   font-weight: bold;
   text-overflow: ellipsis;
+  font-family: "Raleway";
 }
 
 .card-artist-name{
@@ -133,3 +138,17 @@ button {
 #add-room-button {
   margin: auto;
 }
+
+#add-video-button {
+  margin: auto;
+}
+
+#searchbar {
+  display: flex;
+  flex-direction: row;
+}
+
+#videosearchinput {
+  margin: auto;
+}
+
