@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import store, {removeFirstVideo, setCurrentVideo} from '../store'
+import store, {removeFirstVideo, setCurrentVideo, updateVideo} from '../store'
 import {connect} from 'react-redux'
 import YouTube from 'react-youtube'
 
@@ -12,9 +12,8 @@ class VideoPlayer extends Component {
   }
 
     playNext(){
-        if (this.props.videos.length > 0)
-        {
-            this.props.removeFirstVideo(this.props.videos[0].videoId);
+        if (this.props.videos.length > 0) {
+            this.props.setNextVideo(this.props.current, this.props.videos[0]);
         }
     }
 
@@ -31,7 +30,7 @@ class VideoPlayer extends Component {
         return (
 
             <YouTube
-                videoId={current}
+                videoId={current.videoId}
                 opts={opts}
                 onEnd={this.playNext}
             />
@@ -48,8 +47,10 @@ const mapState = (state) => {
 
   const mapDispatch = (dispatch) => {
     return {
-        removeFirstVideo(videoId){
-          dispatch(setCurrentVideo(videoId))
+        setNextVideo(current, next){
+          current.hasPlayed = true
+          dispatch(updateVideo(current))
+          dispatch(setCurrentVideo(next))
           dispatch(removeFirstVideo())
       }
     }

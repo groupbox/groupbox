@@ -5,7 +5,7 @@ import {setCurrentVideo} from './current'
 const ADD_VIDEO_LINK = 'ADD_VIDEO_LINK'
 const REMOVE_FIRST_VIDEO = 'REMOVE_FIRST_VIDEO'
 const GET_VIDEOS = 'GET_VIDEOS'
-const MODIFY_VOTE = 'MODIFY_VOTE'
+const EDIT_VIDEO = 'EDIT_VIDEO'
 
 
 //ACTIONS
@@ -25,7 +25,7 @@ export const getVideos = function(videos){
 
 export const editVideoAction = function(video) {
     return {
-        type: MODIFY_VOTE,
+        type: EDIT_VIDEO,
         video
     }
 }
@@ -70,7 +70,7 @@ export function fetchVideos (roomId) {
             .then(res => res.data)
             .then(videos => {
               let current = videos.shift()
-                dispatch(setCurrentVideo(current.videoId))
+                dispatch(setCurrentVideo(current))
                 dispatch(getVideos(videos))
             })
             .catch(error => console.log(error))
