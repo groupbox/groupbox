@@ -43,7 +43,6 @@ class UserHome extends Component {
 const mapState = (state) => {
   return {
     email: state.user.email,
-    songs: state.songs,
     currentRoom: state.currentRoom
   }
 }
