@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { vote } from './index';
+import {setCurrentVideo} from './current'
+
 const ADD_VIDEO_LINK = 'ADD_VIDEO_LINK'
 const REMOVE_FIRST_VIDEO = 'REMOVE_FIRST_VIDEO'
 const GET_VIDEOS = 'GET_VIDEOS'
@@ -21,7 +22,7 @@ export const getVideos = function(videos){
     }
 }
 
-export const modifyVideoVoteAction = function(videoId, vote){
+export const modifyVoteAction = function(videoId, vote){
     return {
         type: MODIFY_VOTE,
         vote,
@@ -29,6 +30,11 @@ export const modifyVideoVoteAction = function(videoId, vote){
     }
 }
 
+export const removeFirstVideo = function(){
+  return {
+    type: REMOVE_FIRST_VIDEO
+  }
+}
 
 
 //DISPATCHER
@@ -47,6 +53,7 @@ export function addVideoLinkDispatch(videoLink){
           videoObj.title = data.title;
           videoObj.thumbnail = data.thumbnail_url;
           videoObj.videoId = url;
+          videoObj.roomId = 1
           return axios.post('/api/video', videoObj)
         })
         .then(res => dispatch(addVideoLinkAction(res.data)))
@@ -60,26 +67,21 @@ export function fetchVideos (roomId) {
         axios.get(`/api/video/${roomId}`)
             .then(res => res.data)
             .then(videos => {
+              let current = videos.shift()
+                dispatch(setCurrentVideo(current.videoId))
                 dispatch(getVideos(videos))
             })
             .catch(error => console.log(error))
     }
 }
 
-export function modifyVideoVoteDispatcher(videoId, vote){
+export function updateVote(video, vote){
     return function thunk(dispatch){
-        dispatch(modifyVideoVoteAction(videoId, vote))
+      video.vote += vote
+      axios.put('/api/video', video)
+      .then(res => dispatch(modifyVoteAction(res.data)))
+      .then(() => dispatch(fetchVideos(video.roomId)))
     }
-}
-
-//UTILITY
-function sortComparator(objA, objB){
-    let comparison = 0
-    if( objA.vote > objB.vote)
-        comparison = -1
-    else if( objB.vote > objA.vote )
-        comparison = 1
-    return comparison;
 }
 
 
@@ -87,21 +89,11 @@ function sortComparator(objA, objB){
 export default function videosReducer(state = [], action){
     switch (action.type){
         case ADD_VIDEO_LINK:
-            let newVideoArr = [...state, action.videoObj];
-            newVideoArr.sort(sortComparator)
-            return newVideoArr;
+            return [...state, action.videoObj];
         case REMOVE_FIRST_VIDEO:
             return state.slice(1)
         case GET_VIDEOS:
             return action.videos
-        case MODIFY_VOTE:
-            let tempVideoArr = state.map(video => {
-                if(video.videoId === action.videoId)
-                    return Object.assign({}, video, {vote: video.vote + action.vote})
-                return video
-            })
-            tempVideoArr.sort(sortComparator)
-            return tempVideoArr;
         default:
             return state;
     }

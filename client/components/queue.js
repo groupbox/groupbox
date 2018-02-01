@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import FlipMove from 'react-flip-move'
 
 import Card from './Card'
-import store, {addVideoLinkDispatch, setCurrentVideo, fetchVideos} from '../store'
+import store, {addVideoLinkDispatch, setCurrentVideo} from '../store'
 import VideoPlayer from './VideoPlayer'
 
 class Queue extends Component {
@@ -15,12 +15,9 @@ class Queue extends Component {
     }
   }
 
-  componentDidMount() {
-    // this.props.getVideos(roomId)
-  }
-
   render(){
     const { addLinkToQueue, videos } = this.props;
+
     return (
       <div>
 

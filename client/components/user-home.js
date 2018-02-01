@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Queue from './Queue'
-import Search from './Search'
-import {NavLink} from 'react-router-dom'
 import {fetchRoom, fetchVideos} from '../store'
 
 /**
