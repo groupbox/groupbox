@@ -71,7 +71,7 @@ export function fetchVideos (roomId) {
         axios.get(`/api/video/${roomId}`)
             .then(res => res.data)
             .then(videos => {
-              let current = videos.shift()
+                let current = (videos.length > 0) ? videos.shift() : {videoId: ''}
                 dispatch(setCurrentVideo(current.videoId))
                 dispatch(getVideos(videos))
             })
