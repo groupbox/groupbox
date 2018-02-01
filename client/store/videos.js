@@ -85,6 +85,8 @@ export function updateVote(video, vote){
       axios.put('/api/video', video)
       .then(res => dispatch(modifyVoteAction(res.data)))
       .then(() => dispatch(fetchVideos(video.roomId)))
+      .then(() => socket.emit('vote-updte', video.roomId))
+      .catch(err => console.log('updateVote error', err))
     }
 }
 
