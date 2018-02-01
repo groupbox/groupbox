@@ -1,3 +1,3 @@
 # groupbox
 
-A collaborative digital jukebox.
+A collaborative youtube viewing app.

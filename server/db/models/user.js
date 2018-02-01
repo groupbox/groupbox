@@ -13,9 +13,6 @@ const User = db.define('user', {
   salt: {
     type: Sequelize.STRING
   },
-  spotifyId: {
-    type: Sequelize.STRING
-  },
   accessToken: {
     type: Sequelize.STRING
   },

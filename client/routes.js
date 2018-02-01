@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, Search, Test, AllRooms} from './components'
+import {Main, Login, Signup, UserHome, AllRooms} from './components'
 import {me} from './store'
 
 /**
@@ -22,10 +22,8 @@ class Routes extends Component {
         <Main>
           <Switch>
             {/* Routes placed here are available to all visitors */}
-            <Route path="/test" component={Test} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/search" component={Search} />
             <Route exact path="/rooms" component={AllRooms} />
             {
               isLoggedIn &&
@@ -52,7 +50,6 @@ const mapState = (state) => {
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
     current: state.current,
-    songs: state.songs
   }
 }
 
