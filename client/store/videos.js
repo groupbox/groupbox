@@ -1,16 +1,23 @@
 import axios from 'axios';
 import { vote } from './index';
-//var fetchVideoInfo = require('youtube-info');
-
 const ADD_VIDEO_LINK = 'ADD_VIDEO_LINK'
 const REMOVE_FIRST_VIDEO = 'REMOVE_FIRST_VIDEO'
+const GET_VIDEOS = 'GET_VIDEOS'
 const MODIFY_VOTE = 'MODIFY_VOTE'
+
 
 //ACTIONS
 export const addVideoLinkAction = function(videoObj){
     return {
         type: ADD_VIDEO_LINK,
         videoObj
+    }
+}
+
+export const getVideos = function(videos){
+    return {
+        type: GET_VIDEOS,
+        videos
     }
 }
 
@@ -21,6 +28,7 @@ export const modifyVideoVoteAction = function(videoId, vote){
         videoId
     }
 }
+
 
 
 //DISPATCHER
@@ -43,7 +51,18 @@ export function addVideoLinkDispatch(videoLink){
         })
         .then(res => dispatch(addVideoLinkAction(res.data)))
         .catch(error => console.log(error))
-        .catch(error => console.log(error))
+    }
+}
+
+
+export function fetchVideos (roomId) {
+    return function thunk(dispatch) {
+        axios.get(`/api/video/${roomId}`)
+            .then(res => res.data)
+            .then(videos => {
+                dispatch(getVideos(videos))
+            })
+            .catch(error => console.log(error))
     }
 }
 
@@ -63,6 +82,7 @@ function sortComparator(objA, objB){
     return comparison;
 }
 
+
 //REDUCER
 export default function videosReducer(state = [], action){
     switch (action.type){
@@ -72,6 +92,8 @@ export default function videosReducer(state = [], action){
             return newVideoArr;
         case REMOVE_FIRST_VIDEO:
             return state.slice(1)
+        case GET_VIDEOS:
+            return action.videos
         case MODIFY_VOTE:
             let tempVideoArr = state.map(video => {
                 if(video.videoId === action.videoId)

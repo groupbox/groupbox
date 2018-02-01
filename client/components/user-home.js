@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import Queue from './Queue'
 import Search from './Search'
 import {NavLink} from 'react-router-dom'
-import {fetchRoom} from '../store'
+import {fetchRoom, fetchVideos} from '../store'
 
 /**
  * COMPONENT
@@ -15,7 +15,8 @@ class UserHome extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchCurrentRoom(this.props.match.params.id)
+    let roomId = this.props.match.params.id
+    this.props.fetchCurrentRoom(roomId)
   }
 
   render(){
@@ -52,6 +53,7 @@ const mapDispatch = (dispatch) => {
   return {
     fetchCurrentRoom(id){
       dispatch(fetchRoom(id))
+      dispatch(fetchVideos(id))
     }
   }
 }
