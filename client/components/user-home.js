@@ -21,7 +21,7 @@ class UserHome extends Component {
     const { currentRoom } = this.props
     return (
       <div className="container">
-        <h1>{currentRoom.name}</h1>
+        <h1 className="spacetext">{currentRoom.name}</h1>
         <Queue />
       </div>
     )

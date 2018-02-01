@@ -37,6 +37,10 @@ h1 {
 }
 
 h5 {
+  background: url(https://s3.envato.com/files/176875474/Untitled-1.jpg) -80px -80px;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-weight: bold;
   font-size: 18px;
 }
 
@@ -152,3 +156,25 @@ button {
   margin: auto;
 }
 
+.knockout {
+  background: url(https://s3.envato.com/files/176875474/Untitled-1.jpg) -80px -80px;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-weight: bold;
+  font-size: 100px;
+  font-family: arial, helvetica;
+  width: 600px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.spacetext {
+  background: url(https://s3.envato.com/files/176875474/Untitled-1.jpg) -80px -80px;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-weight: bold;
+  font-size: 2em;
+  font-family: arial, helvetica;
+  width: 600px;
+  margin: 50px auto;
+}
