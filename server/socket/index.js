@@ -11,6 +11,11 @@ module.exports = (io) => {
       socket.broadcast.emit('new-video-added', videoObj);
     })
 
+    socket.on('first-current-video', (videoId) => {
+      console.log('first-current-video!!!!!!', videoId)
+      socket.broadcast.emit('first-current-video', videoId);
+    })
+
     socket.on('testing', (data) => {
       console.log('Yaaaaaaaa testing worked!!!!!!', data)
     })

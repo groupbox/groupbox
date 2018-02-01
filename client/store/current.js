@@ -1,4 +1,4 @@
-
+import socket from '../socket';
 
 const SET_CURRENT = 'SET_CURRENT'
 const SET_CURRENT_VIDEO = 'SET_CURRENT_VIDEO'
@@ -20,6 +20,7 @@ export const setCurrentSong = (song) => {
 export const setCurrentVideo = (video) => {
   return function(dispatch){
     dispatch(setCurrentVideoAction(video))
+    socket.emit('first-current-video', video)
   }
 }
 

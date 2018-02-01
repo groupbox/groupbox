@@ -10,6 +10,10 @@ socket.on('connect', () => {
     store.dispatch(addVideoLinkAction(videoObj));
   });
 
+  socket.on('first-current-video', videoId => {
+    store.dispatch(setCurrentVideoAction(videoId))
+  })
+
 });
 
 
