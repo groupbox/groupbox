@@ -49,18 +49,7 @@ class Queue extends Component {
   }
 
   render(){
-    const { songs, current, playlist, addLinkToQ, videos } = this.props;
-
-    function idExists(el, arr){
-      for (var i = 0; i < arr.length; i++){
-        if (arr[i].id === el.id){
-          return true
-        }
-      }
-      return false;
-    }
-
-    const userSongs = songs.filter(song => idExists(song, playlist))
+    const { current, playlist, addLinkToQ, videos } = this.props;
 
     return (
       <div>
@@ -73,8 +62,6 @@ class Queue extends Component {
         <div>
           <VideoPlayer />
         </div>
-
-
         <FlipMove duration={750}>
         {
           videos.map((video, idx) => (
