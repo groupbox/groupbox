@@ -38,14 +38,13 @@ export const removeFirstVideo = function(){
 
 
 //DISPATCHER
-export function addVideoLinkDispatch(videoLink){
+export function addNewVideo(videoLink, roomId, first){
     return function thunk(dispatch){
         let proxy = 'https://cors-anywhere.herokuapp.com/'
         let oembed = 'https://www.youtube.com/oembed?format=json&url='
         //url is the variable that will change
         let url = videoLink;
         let videoObj = {};
-
         axios.get(proxy + oembed + url)
         .then(response => {
           let data = response.data;
@@ -54,11 +53,13 @@ export function addVideoLinkDispatch(videoLink){
           videoObj.thumbnail = data.thumbnail_url;
           videoObj.videoId = url;
           videoObj.vote = 0;
-          videoObj.roomId = 1
+          videoObj.roomId = roomId
           socket.emit('new-video-added', videoObj)
           return axios.post('/api/video', videoObj)
         })
-        .then(res => dispatch(addVideoLinkAction(res.data)))
+        .then(res => {
+          if (!first) dispatch(setCurrentVideo(res.data))
+          dispatch(addVideoLinkAction(res.data))})
         .catch(error => console.log(error))
     }
 }
@@ -70,8 +71,8 @@ export function fetchVideos (roomId) {
             .then(res => res.data)
             .then(videos => {
               let current = videos.shift()
-                dispatch(setCurrentVideo(current))
                 dispatch(getVideos(videos))
+                dispatch(setCurrentVideo(current))
             })
             .catch(error => console.log(error))
     }
