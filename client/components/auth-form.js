@@ -25,9 +25,6 @@ const AuthForm = (props) => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <button>
-        <a href="/auth/spotify">{displayName} with Spotify</a>
-      </button>
     </div>
   )
 }

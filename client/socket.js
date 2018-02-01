@@ -1,5 +1,6 @@
 import io from 'socket.io-client'
-import store, {addVideoLinkAction, fetchVideos} from './store'
+import store, {addVideoLinkAction, setCurrentVideoAction, fetchVideos} from './store'
+
 
 const socket = io(window.location.origin)
 
@@ -19,7 +20,5 @@ socket.on('connect', () => {
   })
 
 });
-
-
 
 export default socket

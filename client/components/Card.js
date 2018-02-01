@@ -53,7 +53,6 @@ class Card extends Component {
 const mapState = (state) => {
   return {
     email: state.user.email,
-    songs: state.songs,
     current: state.current
   }
 }
