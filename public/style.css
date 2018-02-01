@@ -27,6 +27,7 @@ hr {
 }
 
 h1 {
+  text-align: center;
   margin-top: 2rem;
 }
 
@@ -117,4 +118,17 @@ button {
 
 .nav-links {
   float: right;
+}
+
+#room-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.room-box-child {
+  margin: auto;
+}
+
+#add-room-button {
+  margin: auto;
 }

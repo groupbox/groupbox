@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {vote, addToPlaylist, modifyVideoVoteDispatcher} from '../store'
+import {updateVote} from '../store'
 
 class Card extends Component {
   constructor(props){
@@ -9,7 +9,7 @@ class Card extends Component {
   }
 
   render(){
-    const {video, upvoteSong, downvoteSong, type, addSong} = this.props
+    const {video, type, vote} = this.props
 
     return (
       <div className="card container" >
@@ -30,16 +30,16 @@ class Card extends Component {
             type ? (
               <div className="card-control three columns">
                 <div>
-                  <button className="card-control-button" onClick={() => upvoteSong(video.videoId)}>↑</button>
+                  <button className="card-control-button" onClick={() => vote(video, 1)}>↑</button>
                 </div>
                 <div>
-                  <button className="card-control-button" onClick={() => downvoteSong(video.videoId)}>↓</button>
+                  <button className="card-control-button" onClick={() => vote(video, -1)}>↓</button>
                 </div>
               </div>
             ) : (
               <div className="card-control three columns">
                 <div>
-                  <button className="card-control-button-add" onClick={(evt) => addSong(song, evt)}>+</button>
+                  <button className="card-control-button-add">+</button>
                 </div>
               </div>
             )
@@ -60,15 +60,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    upvoteSong (videoId) {
-      dispatch(  modifyVideoVoteDispatcher(videoId, 1)  )
-    },
-    downvoteSong (videoId) {
-      dispatch(  modifyVideoVoteDispatcher(videoId, -1)  )
-    },
-    addSong(song, evt) {
-      evt.target.innerHTML =  '✔'
-      dispatch(addToPlaylist(song))
+    vote(video, direction) {
+      dispatch(updateVote(video, direction))
     }
   }
 }

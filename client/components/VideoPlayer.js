@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import store, {vote, addToPlaylist, setCurrentVideo} from '../store'
+import store, {removeFirstVideo, setCurrentVideo} from '../store'
 import {connect} from 'react-redux'
 import YouTube from 'react-youtube'
-
-const con = console.log;
 
 
 class VideoPlayer extends Component {
@@ -21,7 +19,7 @@ class VideoPlayer extends Component {
     }
 
     render(){
-        const {videos, current} = this.props
+        const {current} = this.props
         const opts = {
             height: '390',
             width: '640',
@@ -52,7 +50,7 @@ const mapState = (state) => {
     return {
         removeFirstVideo(videoId){
           dispatch(setCurrentVideo(videoId))
-          dispatch({type: 'REMOVE_FIRST_VIDEO'})
+          dispatch(removeFirstVideo())
       }
     }
   }
