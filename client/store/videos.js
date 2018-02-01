@@ -70,7 +70,7 @@ export function fetchVideos (roomId) {
         axios.get(`/api/video/${roomId}`)
             .then(res => res.data)
             .then(videos => {
-              let current = videos.shift()
+                let current = (videos.length > 0) ? videos.shift() : {videoId: ''}
                 dispatch(getVideos(videos))
                 dispatch(setCurrentVideo(current))
             })
@@ -83,6 +83,8 @@ export function updateVideo(video){
       axios.put('/api/video', video)
       .then(res => dispatch(editVideoAction(res.data)))
       .then(() => dispatch(fetchVideos(video.roomId)))
+      .then(() => socket.emit('vote-updte', video.roomId))
+      .catch(err => console.log('updateVote error', err))
     }
 }
 
