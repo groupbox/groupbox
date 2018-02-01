@@ -16,8 +16,7 @@ class Queue extends Component {
   }
 
   componentDidMount() {
-    // what is roomId?
-    this.props.getVideos() // <-- roomId goes there
+    // this.props.getVideos(roomId)
   }
 
   render(){
@@ -28,7 +27,7 @@ class Queue extends Component {
 
         <form onSubmit={(event) => addLinkToQueue(event)} className="row">
           <input name="input" className="ten columns" placeholder="Paste link here..."  />
-          <button type="submit" >Add</button>
+          <button type="submit">Add</button>
         </form>
 
         <div>
@@ -72,9 +71,6 @@ const mapDispatch = (dispatch) => {
       }
 
     },
-    getVideos(roomId) {
-      dispatch(fetchVideos(roomId))
-    }
   }
 }
 
