@@ -48,8 +48,8 @@ const mapState = (state) => {
   const mapDispatch = (dispatch) => {
     return {
         setNextVideo(current, next){
-          // current.hasPlayed = true
-          // dispatch(updateVideo(current))
+          current.hasPlayed = true
+          dispatch(updateVideo(current))
           dispatch(setCurrentVideo(next))
           dispatch(removeFirstVideo())
       }

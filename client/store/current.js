@@ -1,4 +1,5 @@
 import socket from '../socket';
+import {updateVideo} from './videos'
 
 const SET_CURRENT_VIDEO = 'SET_CURRENT_VIDEO'
 
@@ -11,7 +12,6 @@ export const setCurrentVideoAction = function(videoId){
 
 export const setCurrentVideo = (video) => {
   return function(dispatch){
-    // video.hasPlayed = true
     dispatch(setCurrentVideoAction(video))
     socket.emit('first-current-video', video)
   }
