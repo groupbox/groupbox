@@ -10,7 +10,8 @@ router.post('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   Video.findAll({
     where: {
-      roomId: req.params.id
+      roomId: req.params.id,
+      hasPlayed: false
     },
     order: [
       ['vote', 'DESC'],

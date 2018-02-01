@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {updateVote} from '../store'
+import {updateVideo} from '../store'
 
 class Card extends Component {
   constructor(props){
@@ -60,7 +60,8 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     vote(video, direction) {
-      dispatch(updateVote(video, direction))
+      video.vote += direction
+      dispatch(updateVideo(video))
     }
   }
 }

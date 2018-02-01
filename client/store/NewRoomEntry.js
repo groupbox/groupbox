@@ -1,4 +1,4 @@
-const WRITE_ROOM_NAME = "WRITE_ROOM_NAME";
+const WRITE_ROOM_NAME = 'WRITE_ROOM_NAME';
 
 export function writeRoomName (roomName) {
   const action = { type: WRITE_ROOM_NAME, roomName };
