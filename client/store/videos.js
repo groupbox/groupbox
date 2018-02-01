@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { vote } from './index';
 import socket from '../socket';
 import {setCurrentVideo} from './current'
 
@@ -24,11 +23,10 @@ export const getVideos = function(videos){
     }
 }
 
-export const modifyVoteAction = function(videoId, vote){
+export const editVideoAction = function(video) {
     return {
         type: MODIFY_VOTE,
-        vote,
-        videoId
+        video
     }
 }
 
@@ -79,11 +77,10 @@ export function fetchVideos (roomId) {
     }
 }
 
-export function updateVote(video, vote){
+export function updateVideo(video){
     return function thunk(dispatch){
-      video.vote += vote
       axios.put('/api/video', video)
-      .then(res => dispatch(modifyVoteAction(res.data)))
+      .then(res => dispatch(editVideoAction(res.data)))
       .then(() => dispatch(fetchVideos(video.roomId)))
     }
 }
