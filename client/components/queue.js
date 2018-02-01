@@ -20,7 +20,7 @@ class Queue extends Component {
   }
 
   render(){
-    const { addLinkToQueue, videos } = this.props;
+    const { current, addLinkToQueue, videos } = this.props;
 
     return (
       <div>
@@ -33,8 +33,6 @@ class Queue extends Component {
         <div>
           <VideoPlayer />
         </div>
-
-
         <FlipMove duration={750}>
         {
           videos.length ? videos.map((video) => (
