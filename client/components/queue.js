@@ -19,16 +19,16 @@ class Queue extends Component {
     const { addLinkToQueue, videos, currentRoom } = this.props;
 
     return (
-      <div>
-
-        <form onSubmit={(event) => addLinkToQueue(event, currentRoom, videos)} className="row">
-          <input name="input" className="ten columns" placeholder="Paste link here..."  />
-          <button type="submit">Add</button>
+      <div className="container">
+        <form onSubmit={(event) => addLinkToQueue(event)} className="row" id="searchbar">
+          <input id="videosearchinput" name="input" className="ten columns" placeholder="Paste link here..."  />
+          <button id="add-video-button" type="submit">Add</button>
         </form>
 
-        <div>
+        <div className="container">
           <VideoPlayer />
         </div>
+        <div>
         <FlipMove duration={750}>
         {
           videos.length ? videos.map((video) => (
@@ -36,6 +36,7 @@ class Queue extends Component {
           )) : null
         }
         </FlipMove>
+        </div>
       </div>
     )
   }

@@ -20,17 +20,9 @@ class UserHome extends Component {
   render(){
     const { currentRoom } = this.props
     return (
-      <div>
-        <div className="container">
-          <div className="container">
-            <div className="main-nav">
-              <div className="row">
-                <h1>{currentRoom.name}</h1>
-              </div>
-            </div>
-            <Queue />
-          </div>
-        </div>
+      <div className="container">
+        <h1 className="spacetext">{currentRoom.name}</h1>
+        <Queue />
       </div>
     )
   }
