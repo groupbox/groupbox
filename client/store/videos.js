@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { vote } from './index';
+import socket from '../socket';
+
 const ADD_VIDEO_LINK = 'ADD_VIDEO_LINK'
 const REMOVE_FIRST_VIDEO = 'REMOVE_FIRST_VIDEO'
 const GET_VIDEOS = 'GET_VIDEOS'
@@ -47,6 +49,8 @@ export function addVideoLinkDispatch(videoLink){
           videoObj.title = data.title;
           videoObj.thumbnail = data.thumbnail_url;
           videoObj.videoId = url;
+          videoObj.vote = 0;
+          socket.emit('new-video-added', videoObj)
           return axios.post('/api/video', videoObj)
         })
         .then(res => dispatch(addVideoLinkAction(res.data)))
