@@ -25,8 +25,7 @@ class UserHome extends Component {
           <div className="container">
             <div className="main-nav">
               <div className="row">
-              <h1>{currentRoom.name}</h1>
-                <h5 onClick={this.handleClick} className="main-nav-text nine columns">now playing: </h5>
+                <h1>{currentRoom.name}</h1>
               </div>
             </div>
             <Queue />
