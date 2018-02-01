@@ -1,12 +1,11 @@
 import axios from 'axios';
-import { vote } from './index';
 import socket from '../socket';
 import {setCurrentVideo} from './current'
 
 const ADD_VIDEO_LINK = 'ADD_VIDEO_LINK'
 const REMOVE_FIRST_VIDEO = 'REMOVE_FIRST_VIDEO'
 const GET_VIDEOS = 'GET_VIDEOS'
-const MODIFY_VOTE = 'MODIFY_VOTE'
+const EDIT_VIDEO = 'EDIT_VIDEO'
 
 
 //ACTIONS
@@ -24,11 +23,10 @@ export const getVideos = function(videos){
     }
 }
 
-export const modifyVoteAction = function(videoId, vote){
+export const editVideoAction = function(video) {
     return {
-        type: MODIFY_VOTE,
-        vote,
-        videoId
+        type: EDIT_VIDEO,
+        video
     }
 }
 
@@ -40,14 +38,13 @@ export const removeFirstVideo = function(){
 
 
 //DISPATCHER
-export function addVideoLinkDispatch(videoLink){
+export function addNewVideo(videoLink, roomId, first){
     return function thunk(dispatch){
         let proxy = 'https://cors-anywhere.herokuapp.com/'
         let oembed = 'https://www.youtube.com/oembed?format=json&url='
         //url is the variable that will change
         let url = videoLink;
         let videoObj = {};
-
         axios.get(proxy + oembed + url)
         .then(response => {
           let data = response.data;
@@ -56,11 +53,13 @@ export function addVideoLinkDispatch(videoLink){
           videoObj.thumbnail = data.thumbnail_url;
           videoObj.videoId = url;
           videoObj.vote = 0;
-          videoObj.roomId = 1
+          videoObj.roomId = roomId
           socket.emit('new-video-added', videoObj)
           return axios.post('/api/video', videoObj)
         })
-        .then(res => dispatch(addVideoLinkAction(res.data)))
+        .then(res => {
+          if (!first) dispatch(setCurrentVideo(res.data))
+          dispatch(addVideoLinkAction(res.data))})
         .catch(error => console.log(error))
     }
 }
@@ -71,19 +70,20 @@ export function fetchVideos (roomId) {
         axios.get(`/api/video/${roomId}`)
             .then(res => res.data)
             .then(videos => {
+
                 let current = (videos.length > 0) ? videos.shift() : {videoId: ''}
                 dispatch(setCurrentVideo(current.videoId))
                 dispatch(getVideos(videos))
+                dispatch(setCurrentVideo(current))
             })
             .catch(error => console.log(error))
     }
 }
 
-export function updateVote(video, vote){
+export function updateVideo(video){
     return function thunk(dispatch){
-      video.vote += vote
       axios.put('/api/video', video)
-      .then(res => dispatch(modifyVoteAction(res.data)))
+      .then(res => dispatch(editVideoAction(res.data)))
       .then(() => dispatch(fetchVideos(video.roomId)))
       .then(() => socket.emit('vote-updte', video.roomId))
       .catch(err => console.log('updateVote error', err))
