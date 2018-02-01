@@ -12,6 +12,22 @@ import {Link} from 'react-router-dom'
     const { rooms, newRoomEntry, handleSubmit, handleChange } = this.props;
      return (
       <div id="room-box">
+        <form className="room-box-child" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="name">Create a Room</label>
+            <input
+              value={newRoomEntry}
+              onChange={handleChange}
+              className="form-control"
+              type="text"
+              name="roomName"
+              placeholder="Enter room name"
+            />
+          </div>
+          <div className="form-group">
+            <button type="submit" className="btn btn-default">Create Room</button>
+          </div>
+        </form>
           {
             rooms.map((room) => {
               return (
@@ -19,7 +35,7 @@ import {Link} from 'react-router-dom'
                   <div className="card container">
                     <div className="row">
                       <div className="card-image three columns">
-                        <img src={null} />
+                        <img src="http://www.breagaghview.com/images/icons/tv.ico" />
                       </div>
                       <div className="card-artist five columns">
                         <div className="card-artist-song">{room.name}</div>
@@ -37,22 +53,6 @@ import {Link} from 'react-router-dom'
               )
             })
           }
-          <form className="room-box-child" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="name">Create a Room</label>
-              <input
-                value={newRoomEntry}
-                onChange={handleChange}
-                className="form-control"
-                type="text"
-                name="roomName"
-                placeholder="Enter room name"
-              />
-            </div>
-            <div className="form-group">
-              <button type="submit" className="btn btn-default">Create Room</button>
-            </div>
-          </form>
       </div>
     )
   }
