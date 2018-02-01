@@ -1,19 +1,10 @@
 
-
-const SET_CURRENT = 'SET_CURRENT'
 const SET_CURRENT_VIDEO = 'SET_CURRENT_VIDEO'
 
-export const setCurrent = song => ({type: SET_CURRENT, song})
 export const setCurrentVideoAction = function(videoId){
   return {
     type: SET_CURRENT_VIDEO,
     videoId
-  }
-}
-
-export const setCurrentSong = (song) => {
-  return function(dispatch){
-    dispatch(setCurrent(song))
   }
 }
 
@@ -26,8 +17,6 @@ export const setCurrentVideo = (video) => {
 
 export default function (state = '', action){
   switch (action.type) {
-    case SET_CURRENT:
-      return action.song || state
     case SET_CURRENT_VIDEO:
       return action.videoId || state
     default:

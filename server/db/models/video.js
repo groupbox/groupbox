@@ -15,7 +15,8 @@ const Video = db.define('video', {
     allowNull: false,
     set: function(url){
       let id = youtubeId(url)
-      this.setDataValue('videoId', id)
+      if (id) this.setDataValue('videoId', id)
+      else this.setDataValue('videoId', url)
     }
   },
   thumbnail: {
