@@ -16,12 +16,12 @@ class Queue extends Component {
   }
 
   render(){
-    const { addLinkToQueue, videos, currentRoom } = this.props;
+    const { addLinkToQueue, videos, currentRoom, current } = this.props;
 
     return (
       <div>
 
-        <form onSubmit={(event) => addLinkToQueue(event, currentRoom, videos)} className="row">
+        <form onSubmit={(event) => addLinkToQueue(event, currentRoom, current)} className="row">
           <input name="input" className="ten columns" placeholder="Paste link here..."  />
           <button type="submit">Add</button>
         </form>
@@ -45,16 +45,16 @@ const mapState = (state) => {
   return {
     email: state.user.email,
     videos: state.videos,
-    currentRoom: state.currentRoom
+    currentRoom: state.currentRoom,
+    current: state.current
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    addLinkToQueue(event, currentRoom, videos){
+    addLinkToQueue(event, currentRoom, current){
       event.preventDefault();
-      let first = videos.length
-      dispatch(addNewVideo(event.target.input.value, currentRoom.id, first))
+      dispatch(addNewVideo(event.target.input.value, currentRoom.id, current))
       event.target.input.value = '';
       }
   }
