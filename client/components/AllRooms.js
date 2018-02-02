@@ -34,16 +34,16 @@ import {Link} from 'react-router-dom'
               return (
                 <div key={room.id} className="room-box-child">
                   <div className="card container">
-                    <div className="row">
+                    <div className="room-box-row">
                       <div className="card-image three columns">
                         <img src="http://www.breagaghview.com/images/icons/tv.ico" />
                       </div>
-                      <div className="card-artist five columns">
+                      <div id="room-box-name" className="card-artist five columns">
                         <div className="card-artist-song">{room.name}</div>
                       </div>
-                      <div className="card-vote one columns">
+                      <div id="join-button" className="card-vote one columns">
                       <Link to={`/rooms/${room.id}`}>
-                        <button className="card-control-button">
+                        <button id="join-button" className="card-control-button">
                           Join
                         </button>
                       </Link>

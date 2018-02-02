@@ -89,6 +89,7 @@ button {
   max-width: 60%;
   box-sizing: border-box;
   padding-left: 20px;
+  padding-top: 10px;
   margin: auto;
 }
 
@@ -150,6 +151,20 @@ button {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+}
+
+.room-box-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#room-box-name {
+  text-align: center;
+}
+
+#join-button {
+  margin: auto;
 }
 
 .create-room-child {
