@@ -13,12 +13,12 @@ class Card extends Component {
 
     return (
       <div className="card container">
-        <div className="row">
+        <div className="row" id="cardid">
           <div className="card-image three columns">
             <img src={video.thumbnail || null} />
           </div>
           <div className="card-artist five columns">
-            <div className="card-artist-song">{video.title || null}</div>
+            <div>{video.title || null}</div>
             <div className="card-artist-name">
               <div>{video.author || null}</div>
             </div>
@@ -30,10 +30,10 @@ class Card extends Component {
             type ? (
               <div className="card-control three columns">
                 <div>
-                  <button className="card-control-button" onClick={() => vote(video, 1)}>↑</button>
+                  <button id="upvote-button" className="card-control-button" onClick={() => vote(video, 1)}>↑</button>
                 </div>
                 <div>
-                  <button className="card-control-button" onClick={() => vote(video, -1)}>↓</button>
+                  <button id="downvote-button" className="card-control-button" onClick={() => vote(video, -1)}>↓</button>
                 </div>
               </div>
             ) : (
