@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: "Raleway";
   background-color: #232426;
   color: white;
 }
@@ -14,7 +14,8 @@ label {
 
 nav a {
   display: inline-block;
-  margin: 1em;
+  margin: 0.5em;
+  margin-bottom: 0px;
 }
 
 form div {
@@ -23,16 +24,20 @@ form div {
 }
 
 hr {
-  margin-bottom: 1rem;
+  margin: 0px 0px 0.5em 0px;
 }
 
 h1 {
-  font-size: 2.5em;
+  font-size: 2em;
   text-align: center;
   margin-top: 2rem;
 }
 
 h5 {
+  background: url(https://s3.envato.com/files/176875474/Untitled-1.jpg) -80px -80px;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-weight: bold;
   font-size: 18px;
 }
 
@@ -70,9 +75,10 @@ button {
 }
 
 .card-artist-song {
-  font-size: 18px;
+  font-size: 1.5em;
   font-weight: bold;
   text-overflow: ellipsis;
+  font-family: "Raleway";
 }
 
 .card-artist-name{
@@ -82,6 +88,9 @@ button {
 .card img {
   max-width: 60%;
   box-sizing: border-box;
+  padding-left: 20px;
+  padding-top: 10px;
+  margin: auto;
 }
 
 .card button {
@@ -115,10 +124,18 @@ button {
 
 .nav-welcome {
   flex-grow: 1;
+  margin-top: 0.8em;
+}
+
+#welcome-message {
+  font-size: 1em;
+  padding: 0px;
+  flex-grow: 2;
 }
 
 .nav-links {
   float: right;
+  margin-top: 0.3em;
 }
 
 #room-box {
@@ -130,6 +147,112 @@ button {
   margin: auto;
 }
 
+#create-room-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.room-box-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#room-box-name {
+  text-align: center;
+}
+
+#join-button {
+  margin: auto;
+}
+
+.create-room-child {
+  margin: auto;
+  padding: 1em;
+}
+
+#create-room-button {
+  padding-left: 0.2em;
+}
+
 #add-room-button {
   margin: auto;
+}
+
+#add-video-button {
+  margin: auto;
+}
+
+#searchbar {
+  display: flex;
+  flex-direction: row;
+  padding: 1em 0px 0px 0px;
+  margin: auto;
+}
+
+#videosearchinput {
+  margin: auto;
+}
+
+.knockout {
+  background: url(https://s3.envato.com/files/176875474/Untitled-1.jpg) -80px -80px;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-weight: bold;
+  font-size: 3.5em;
+  font-family: arial, helvetica;
+  width: 600px;
+  margin: auto;
+  text-align: center;
+}
+
+
+#room-name-container {
+  display: flex;
+}
+
+.spacetext {
+  background: url(https://s3.envato.com/files/176875474/Untitled-1.jpg) -80px -80px;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-weight: bold;
+  font-size: 1.5em;
+  font-family: arial, helvetica;
+  align-self: flex-start;
+  margin: 0.2em 0px 0.5em 0px;
+}
+
+#videoplayer {
+  margin: auto;
+}
+
+#upvote-button {
+  margin: auto;
+  padding: 2px 10px 2px 10px;
+}
+
+#downvote-button {
+  margin: auto;
+  padding: 2px 10px 2px 10px;
+}
+
+#cardid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.login-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.login-box-child {
+  margin: auto;
+}
+
+#login-button {
+  margin-bottom: 0px;
 }

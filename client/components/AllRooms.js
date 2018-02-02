@@ -12,37 +12,38 @@ import {Link} from 'react-router-dom'
     const { rooms, newRoomEntry, handleSubmit, handleChange } = this.props;
      return (
       <div id="room-box">
-        <form className="room-box-child" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Create a Room</label>
+        <form onSubmit={handleSubmit} className="room-box-child">
+          <div className="form-group" id="create-room-box">
+            <label htmlFor="name" className="create-room-child">Create a Room :</label>
             <input
               value={newRoomEntry}
               onChange={handleChange}
-              className="form-control"
               type="text"
+              className="create-room-child"
               name="roomName"
               placeholder="Enter room name"
             />
+            <div className="form-group" className="create-room-child" id="create-room-button">
+              <button type="submit" className="btn btn-default">Create Room</button>
+            </div>
           </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-default">Create Room</button>
-          </div>
+
         </form>
           {
             rooms.map((room) => {
               return (
                 <div key={room.id} className="room-box-child">
                   <div className="card container">
-                    <div className="row">
+                    <div className="room-box-row">
                       <div className="card-image three columns">
                         <img src="http://www.breagaghview.com/images/icons/tv.ico" />
                       </div>
-                      <div className="card-artist five columns">
+                      <div id="room-box-name" className="card-artist five columns">
                         <div className="card-artist-song">{room.name}</div>
                       </div>
-                      <div className="card-vote one columns">
+                      <div id="join-button" className="card-vote one columns">
                       <Link to={`/rooms/${room.id}`}>
-                        <button className="card-control-button">
+                        <button id="join-button" className="card-control-button">
                           Join
                         </button>
                       </Link>

@@ -23,9 +23,9 @@ class VideoPlayer extends Component {
             height: '390',
             width: '640',
             playerVars: {
-              autoplay: 1
+                autoplay: 1
             }
-          };
+            };
 
         return (
 
