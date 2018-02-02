@@ -20,3 +20,13 @@ router.get('/:id', (req, res, next) => {
     .then(room => res.json(room))
     .catch(next)
 })
+
+router.delete('/:id', (req, res, next) => {
+  Room.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(() => res.sendStatus(200))
+    .catch(next)
+})

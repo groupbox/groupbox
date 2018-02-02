@@ -24,16 +24,16 @@ class Card extends Component {
             </div>
           </div>
           <div className="card-vote one columns">
-            <div className="card-vote-amt">{video.vote}</div>
+            <div className="card-vote-amt">Vote:{video.vote}</div>
           </div>
           {
             type ? (
-              <div className="card-control three columns">
-                <div>
-                  <button id="upvote-button" className="card-control-button" onClick={() => vote(video, 1)}>↑</button>
+              <div id="up-down-container" className="card-control three columns">
+                <div id="upvote-button">
+                  <button className="card-control-button" onClick={() => vote(video, 1)}>↑</button>
                 </div>
-                <div>
-                  <button id="downvote-button" className="card-control-button" onClick={() => vote(video, -1)}>↓</button>
+                <div id="downvote-button">
+                  <button className="card-control-button" onClick={() => vote(video, -1)}>↓</button>
                 </div>
               </div>
             ) : (
