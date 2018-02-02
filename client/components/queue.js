@@ -24,7 +24,7 @@ class Queue extends Component {
           <VideoPlayer />
         </div>
 
-        <form onSubmit={(event) => addLinkToQueue(event)} className="row" id="searchbar">
+        <form onSubmit={(event) => addLinkToQueue(event, currentRoom, videos)} className="row" id="searchbar">
           <input id="videosearchinput" name="input" className="ten columns" placeholder="Paste link here..."  />
           <button id="add-video-button" type="submit">Add</button>
         </form>
