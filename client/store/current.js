@@ -1,3 +1,4 @@
+import axios from 'axios'
 import socket from '../socket';
 import {updateVideo} from './videos'
 
@@ -13,16 +14,17 @@ export const setCurrentVideoAction = function(videoId){
 export const setCurrentVideo = (video) => {
   return function(dispatch){
     dispatch(setCurrentVideoAction(video))
+    axios.put('/api/video/' + video.id, video)
+    .catch(err => console.log('setCurrentVideo errorrrrrrrr', err))
     socket.emit('first-current-video', video)
   }
 }
 
 
-export default function (state = '', action){
+export default function (state = {videoId: ''}, action){
   switch (action.type) {
     case SET_CURRENT_VIDEO:
-      //return action.videoId || state
-      return action.videoId || ''
+      return action.videoId || state
     default:
       return state
   }

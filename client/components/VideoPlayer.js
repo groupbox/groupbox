@@ -47,10 +47,11 @@ const mapState = (state) => {
 
   const mapDispatch = (dispatch) => {
     return {
-        setNextVideo(current, next){
+        setNextVideo(current, nextVideo){
           current.hasPlayed = true
+          nextVideo.vote = 99999
           dispatch(updateVideo(current))
-          dispatch(setCurrentVideo(next))
+          dispatch(setCurrentVideo(nextVideo))
           dispatch(removeFirstVideo())
       }
     }
