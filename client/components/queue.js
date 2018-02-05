@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import FlipMove from 'react-flip-move'
 
 import Card from './Card'
-import {addNewVideo, fetchVideos} from '../store'
+import {addNewVideo} from '../store'
 import VideoPlayer from './VideoPlayer'
 
 class Queue extends Component {
