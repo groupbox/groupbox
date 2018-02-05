@@ -39,7 +39,7 @@ export const removeFirstVideo = function(){
 
 //DISPATCHER
 
-export function addNewVideo(videoLink, roomId, videoArrLen, current){
+export function addNewVideo(videoLink, roomId, current){
     return function thunk(dispatch){
         let proxy = 'https://cors-anywhere.herokuapp.com/'
         let oembed = 'https://www.youtube.com/oembed?format=json&url='
@@ -53,13 +53,12 @@ export function addNewVideo(videoLink, roomId, videoArrLen, current){
           videoObj.title = data.title;
           videoObj.thumbnail = data.thumbnail_url;
           videoObj.videoId = url;
-          videoObj.vote = (videoArrLen === 0  && current.videoId === '') ? 99999 : 0 //setting to a high vote if it's the first video
           videoObj.roomId = roomId
           socket.emit('new-video-added', videoObj)
           return axios.post('/api/video', videoObj)
         })
         .then(res => {
-          if (!videoArrLen && current.videoId === '') dispatch(setCurrentVideo(res.data)) 
+          if (!current.videoId) dispatch(setCurrentVideo(res.data))
           else dispatch(addVideoLinkAction(res.data))})
         .catch(error => console.log(error))
     }
@@ -70,11 +69,7 @@ export function fetchVideos (roomId) {
     return function thunk(dispatch) {
         axios.get(`/api/video/${roomId}`)
             .then(res => res.data)
-            .then(videos => {
-                let current = (videos.length > 0) ? videos.shift() : {videoId: ''}
-                dispatch(getVideos(videos))
-                dispatch(setCurrentVideo(current))
-            })
+            .then(videos => dispatch(getVideos(videos)))
             .catch(error => console.log(error))
     }
 }
@@ -82,7 +77,7 @@ export function fetchVideos (roomId) {
 export function updateVideo(video){
     return function thunk(dispatch){
       axios.put('/api/video', video)
-      //.then(res => dispatch(editVideoAction(res.data)))
+      .then(res => dispatch(editVideoAction(res.data)))
       .then(() => dispatch(fetchVideos(video.roomId)))
       .then(() => socket.emit('vote-updte', video.roomId))
       .catch(err => console.log('updateVote error', err))

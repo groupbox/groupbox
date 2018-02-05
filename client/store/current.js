@@ -1,6 +1,5 @@
 import axios from 'axios'
 import socket from '../socket';
-import {updateVideo} from './videos'
 
 const SET_CURRENT_VIDEO = 'SET_CURRENT_VIDEO'
 
@@ -13,9 +12,10 @@ export const setCurrentVideoAction = function(videoId){
 
 export const setCurrentVideo = (video) => {
   return function(dispatch){
+    video.hasPlayed = true
     dispatch(setCurrentVideoAction(video))
     axios.put('/api/video/' + video.id, video)
-    .catch(err => console.log('setCurrentVideo errorrrrrrrr', err))
+    .catch(err => console.log('setCurrentVideo error', err))
     socket.emit('first-current-video', video)
   }
 }
