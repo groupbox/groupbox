@@ -38,7 +38,8 @@ export const removeFirstVideo = function(){
 
 
 //DISPATCHER
-export function addNewVideo(videoLink, roomId, current){
+
+export function addNewVideo(videoLink, roomId, videoArrLen, current){
     return function thunk(dispatch){
         let proxy = 'https://cors-anywhere.herokuapp.com/'
         let oembed = 'https://www.youtube.com/oembed?format=json&url='
@@ -52,13 +53,13 @@ export function addNewVideo(videoLink, roomId, current){
           videoObj.title = data.title;
           videoObj.thumbnail = data.thumbnail_url;
           videoObj.videoId = url;
-          videoObj.vote = 0;
+          videoObj.vote = (videoArrLen === 0  && current.videoId === '') ? 99999 : 0 //setting to a high vote if it's the first video
           videoObj.roomId = roomId
           socket.emit('new-video-added', videoObj)
           return axios.post('/api/video', videoObj)
         })
         .then(res => {
-          if (!current.videoId) dispatch(setCurrentVideo(res.data))
+          if (!videoArrLen && current.videoId === '') dispatch(setCurrentVideo(res.data)) 
           else dispatch(addVideoLinkAction(res.data))})
         .catch(error => console.log(error))
     }
@@ -81,7 +82,7 @@ export function fetchVideos (roomId) {
 export function updateVideo(video){
     return function thunk(dispatch){
       axios.put('/api/video', video)
-      .then(res => dispatch(editVideoAction(res.data)))
+      //.then(res => dispatch(editVideoAction(res.data)))
       .then(() => dispatch(fetchVideos(video.roomId)))
       .then(() => socket.emit('vote-updte', video.roomId))
       .catch(err => console.log('updateVote error', err))

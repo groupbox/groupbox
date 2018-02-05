@@ -24,7 +24,7 @@ class Queue extends Component {
           <VideoPlayer />
         </div>
 
-        <form onSubmit={(event) => addLinkToQueue(event, currentRoom, current)} className="row" id="searchbar">
+        <form onSubmit={(event) => addLinkToQueue(event, currentRoom, videos, current)} className="row" id="searchbar">
           <input id="videosearchinput" name="input" className="ten columns" placeholder="Paste link here..."  />
           <button id="add-video-button" type="submit">Add</button>
         </form>
@@ -53,9 +53,10 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    addLinkToQueue(event, currentRoom, current){
+    addLinkToQueue(event, currentRoom, videos, current){
       event.preventDefault();
-      dispatch(addNewVideo(event.target.input.value, currentRoom.id, current))
+      let videoArrLen = videos.length
+      dispatch(addNewVideo(event.target.input.value, currentRoom.id, videoArrLen, current))
       event.target.input.value = '';
       }
   }
