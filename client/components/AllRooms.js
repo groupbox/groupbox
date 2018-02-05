@@ -10,6 +10,9 @@ import {Link} from 'react-router-dom'
 
    render(){
     const { rooms, newRoomEntry, handleSubmit, handleChange, deleteRoom } = this.props;
+
+    console.log(rooms, 'THE ROOMS')
+
      return (
       <div id="room-box">
         <form onSubmit={handleSubmit} className="room-box-child">

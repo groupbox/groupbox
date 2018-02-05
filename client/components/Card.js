@@ -24,7 +24,7 @@ class Card extends Component {
             </div>
           </div>
           <div className="card-vote one columns">
-            <div className="card-vote-amt">Vote:{video.vote}</div>
+            <div className="card-vote-amt">Vote: {video.vote}</div>
           </div>
           {
             type ? (
