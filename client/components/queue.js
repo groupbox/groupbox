@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import FlipMove from 'react-flip-move'
 
 import Card from './Card'
-import {addNewVideo, fetchVideos} from '../store'
+import {addNewVideo} from '../store'
 import VideoPlayer from './VideoPlayer'
 
 class Queue extends Component {
@@ -24,7 +24,7 @@ class Queue extends Component {
           <VideoPlayer />
         </div>
 
-        <form onSubmit={(event) => addLinkToQueue(event, currentRoom, videos, current)} className="row" id="searchbar">
+        <form onSubmit={(event) => addLinkToQueue(event, currentRoom, current)} className="row" id="searchbar">
           <input id="videosearchinput" name="input" className="ten columns" placeholder="Paste link here..."  />
           <button id="add-video-button" type="submit">Add</button>
         </form>
@@ -53,10 +53,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    addLinkToQueue(event, currentRoom, videos, current){
+    addLinkToQueue(event, currentRoom, current){
       event.preventDefault();
-      let videoArrLen = videos.length
-      dispatch(addNewVideo(event.target.input.value, currentRoom.id, videoArrLen, current))
+      dispatch(addNewVideo(event.target.input.value, currentRoom.id, current))
       event.target.input.value = '';
       }
   }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Queue from './Queue'
-import {fetchRoom, fetchVideos} from '../store'
+import {fetchRoom, fetchVideos, fetchCurrentVideo} from '../store'
 
 /**
  * COMPONENT
@@ -36,15 +36,17 @@ class UserHome extends Component {
 const mapState = (state) => {
   return {
     email: state.user.email,
-    currentRoom: state.currentRoom
+    currentRoom: state.currentRoom,
+    current: state.current
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchCurrentRoom(id){
-      dispatch(fetchRoom(id))
-      dispatch(fetchVideos(id))
+    fetchCurrentRoom(roomId, current){
+      dispatch(fetchRoom(roomId))
+      dispatch(fetchVideos(roomId, current))
+      dispatch(fetchCurrentVideo(roomId))
     }
   }
 }
