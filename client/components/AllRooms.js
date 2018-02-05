@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {fetchRooms, writeRoomName, postRoom} from '../store'
+import {fetchRooms, writeRoomName, postRoom, destroyRoom} from '../store'
 import {Link} from 'react-router-dom'
 
  class AllRooms extends Component {
@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom'
    }
 
    render(){
-    const { rooms, newRoomEntry, handleSubmit, handleChange } = this.props;
+    const { rooms, newRoomEntry, handleSubmit, handleChange, deleteRoom } = this.props;
      return (
       <div id="room-box">
         <form onSubmit={handleSubmit} className="room-box-child">
@@ -34,19 +34,22 @@ import {Link} from 'react-router-dom'
               return (
                 <div key={room.id} className="room-box-child">
                   <div className="card container">
-                    <div className="row">
+                    <div className="room-box-row">
                       <div className="card-image three columns">
-                        <img src="http://www.breagaghview.com/images/icons/tv.ico" />
+                        <img id="room-img" src="http://www.breagaghview.com/images/icons/tv.ico" />
                       </div>
-                      <div className="card-artist five columns">
+                      <div id="room-box-name" className="card-artist five columns">
                         <div className="card-artist-song">{room.name}</div>
                       </div>
-                      <div className="card-vote one columns">
-                      <Link to={`/rooms/${room.id}`}>
-                        <button className="card-control-button">
-                          Join
-                        </button>
-                      </Link>
+                      <div id="join-button" className="card-vote one columns">
+                        <Link to={`/rooms/${room.id}`}>
+                          <button className="card-control-button">
+                            Join
+                          </button>
+                        </Link>
+                          <button onClick={() => deleteRoom(room.id)} id="delete-button" className="card-control-button">
+                            X
+                          </button>
                       </div>
                     </div>
                   </div>
@@ -79,6 +82,9 @@ import {Link} from 'react-router-dom'
        const name = evt.target.roomName.value;
        dispatch(postRoom({ name }, ownProps.history))
        dispatch(writeRoomName(''))
+    },
+    deleteRoom: (id) => {
+      dispatch(destroyRoom(id))
     }
   }
 }

@@ -38,6 +38,7 @@ export const removeFirstVideo = function(){
 
 
 //DISPATCHER
+
 export function addNewVideo(videoLink, roomId, videoArrLen, current){
     return function thunk(dispatch){
         let proxy = 'https://cors-anywhere.herokuapp.com/'

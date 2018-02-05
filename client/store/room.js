@@ -5,7 +5,6 @@ const GET_ROOM = 'GET_ROOM'
 
 const getRoom = room => ({type: GET_ROOM, room})
 
-
 let initialRoom = {}
 
 export const fetchRoom = (roomId) =>
