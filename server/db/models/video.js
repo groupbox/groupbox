@@ -30,6 +30,10 @@ const Video = db.define('video', {
   hasPlayed: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  isCurrent: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 

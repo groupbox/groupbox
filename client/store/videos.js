@@ -58,8 +58,9 @@ export function addNewVideo(videoLink, roomId, current){
           return axios.post('/api/video', videoObj)
         })
         .then(res => {
-          if (!current.videoId) dispatch(setCurrentVideo(res.data))
-          else dispatch(addVideoLinkAction(res.data))})
+          if (!current.videoId) {
+            dispatch(setCurrentVideo(res.data))}
+          else {dispatch(addVideoLinkAction(res.data))}})
         .catch(error => console.log(error))
     }
 }
@@ -73,6 +74,7 @@ export function fetchVideos (roomId) {
             .catch(error => console.log(error))
     }
 }
+
 
 export function updateVideo(video){
     return function thunk(dispatch){

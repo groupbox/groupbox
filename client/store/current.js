@@ -3,28 +3,40 @@ import socket from '../socket';
 
 const SET_CURRENT_VIDEO = 'SET_CURRENT_VIDEO'
 
-export const setCurrentVideoAction = function(videoId){
+export const setCurrentVideoAction = function(video){
   return {
     type: SET_CURRENT_VIDEO,
-    videoId
+    video
   }
 }
+
 
 export const setCurrentVideo = (video) => {
   return function(dispatch){
+    if (video.videoId){
     video.hasPlayed = true
+    video.isCurrent = true
     dispatch(setCurrentVideoAction(video))
-    axios.put('/api/video/' + video.id, video)
-    .catch(err => console.log('setCurrentVideo error', err))
-    socket.emit('first-current-video', video)
+      axios.put('/api/video/', video)
+      .catch(err => console.log('setCurrentVideo error', err))
+      socket.emit('first-current-video', video)
+    }
   }
 }
 
+export const fetchCurrentVideo = (roomId) => {
+  return function(dispatch){
+    axios.get(`/api/current/${roomId}`)
+    .then(res => res.data)
+    .then(video => dispatch(setCurrentVideo(video)))
+    .catch(err => console.log(err))
+  }
+}
 
 export default function (state = {videoId: ''}, action){
   switch (action.type) {
     case SET_CURRENT_VIDEO:
-      return action.videoId || state
+      return action.video || state
     default:
       return state
   }
