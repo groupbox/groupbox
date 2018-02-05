@@ -2,14 +2,16 @@
 const User = require('./user')
 const Room = require('./room')
 const Video = require('./video');
+const Vote = require('./vote');
 
 Room.hasMany(Video)
 Video.belongsTo(Room)
-Room.belongsToMany(User, { through: 'userRoom' })
-User.belongsToMany(Room, { through: 'userRoom' })
+Vote.belongsTo(User)
+Vote.belongsTo(Video)
 
 module.exports = {
   User,
   Video,
-  Room
+  Room,
+  Vote
 };
