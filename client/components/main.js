@@ -20,7 +20,7 @@ const Main = (props) => {
                   <h5 id="welcome-message">Welcome, {email}</h5>
                 </div>
                 <Link to={'/rooms'}>
-                  <div className="knockout">groupbox</div>
+                  <div id="logo">groupbox</div>
                 </Link>
                 <div className="nav-links">
                   <Link to="/rooms">Rooms</Link>
