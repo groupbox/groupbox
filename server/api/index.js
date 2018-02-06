@@ -5,6 +5,7 @@ router.use('/users', require('./users'))
 router.use('/rooms', require('./rooms'))
 router.use('/video', require('./video'))
 router.use('/current', require('./current'))
+router.use('/vote', require('./vote'))
 
 
 router.use((req, res, next) => {

@@ -8,8 +8,9 @@ import videos from './videos'
 import currentRoom from './room'
 import rooms from './rooms'
 import NewRoomEntry from './NewRoomEntry'
+import userVotes from './vote'
 
-const reducer = combineReducers({user, current, videos, currentRoom, rooms, NewRoomEntry})
+const reducer = combineReducers({user, current, videos, currentRoom, rooms, NewRoomEntry, userVotes})
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
@@ -23,3 +24,4 @@ export * from './videos'
 export * from './room'
 export * from './rooms'
 export * from './NewRoomEntry'
+export * from './vote'
