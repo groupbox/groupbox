@@ -23,17 +23,16 @@ class VideoPlayer extends Component {
             height: '390',
             width: '640',
             playerVars: {
-                autoplay: 1
+                autoplay: 1,
+                // controls: 0
             }
             };
 
         return (
-
-            <YouTube
+                <YouTube
                 videoId={current.videoId}
                 opts={opts}
-                onEnd={this.playNext}
-            />
+                onEnd={this.playNext} />
         )
     }
 }
