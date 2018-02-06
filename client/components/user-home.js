@@ -37,15 +37,16 @@ const mapState = (state) => {
   return {
     email: state.user.email,
     currentRoom: state.currentRoom,
-    current: state.current
+    current: state.current,
+    user: state.user
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchCurrentRoom(roomId, current){
+    fetchCurrentRoom(roomId){
       dispatch(fetchRoom(roomId))
-      dispatch(fetchVideos(roomId, current))
+      dispatch(fetchVideos(roomId))
       dispatch(fetchCurrentVideo(roomId))
     }
   }

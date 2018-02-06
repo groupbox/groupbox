@@ -59,6 +59,7 @@ input {
   font-weight: bold;
 }
 
+
 .card button:hover{
   background-color: #EAE7DC;
   color: #E98074;
@@ -70,6 +71,13 @@ input {
 .card button:active {
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2);
 }
+
+.card button:disabled {
+  box-shadow: none;
+  background-color: #E98074;
+  color: #EAE7DC;
+}
+
 
 a {
   text-decoration: none;
@@ -230,6 +238,12 @@ button {
   border-color: #E85A4f;
   font-size: 18px;
   font-weight: bold;
+}
+
+#up-down-container button:disabled {
+  background-color: #E98074;
+  border-color: white;
+  color: white;
 }
 
 #downvote-button {
