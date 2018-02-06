@@ -21,9 +21,8 @@ class Queue extends Component {
     return (
       <div className="container">
         <div className="container" id="videoplayer">
-          <VideoPlayer />
+          {this.props.show ? <VideoPlayer /> : null}
         </div>
-
         <form onSubmit={(event) => addLinkToQueue(event, currentRoom, current)} className="row" id="searchbar">
           <input id="videosearchinput" name="input" className="ten columns" placeholder="Paste link here..."  />
           <button id="add-video-button" type="submit">Add</button>

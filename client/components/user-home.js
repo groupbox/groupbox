@@ -9,12 +9,28 @@ import {fetchRoom, fetchVideos, fetchCurrentVideo} from '../store'
 class UserHome extends Component {
   constructor(props){
     super(props)
-    this.state = {}
+    this.state = {
+      show: false
+    }
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount(){
     let roomId = this.props.match.params.id
     this.props.fetchCurrentRoom(roomId)
+  }
+
+  handleClick () {
+    if(!this.state.show) {
+      this.setState({
+        show: true
+      })
+    } else {
+      this.setState({
+        show: false
+      })
+    }
+
   }
 
   render(){
@@ -23,8 +39,12 @@ class UserHome extends Component {
       <div className="container">
         <div id="room-name-container">
         <h1 className="spacetext">{currentRoom.name}</h1>
+        <label id="toggle-video" className="switch">
+          <input type="checkbox" />
+          <span className="slider round" onClick={this.handleClick} />
+        </label>
         </div>
-        <Queue />
+        <Queue show={this.state.show} />
       </div>
     )
   }
