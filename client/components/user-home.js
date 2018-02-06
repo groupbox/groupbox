@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Queue from './Queue'
-import {fetchRoom, fetchVideos, fetchCurrentVideo} from '../store'
+import {fetchRoom, fetchVideos, fetchCurrentVideo, setCurrentVideoAction} from '../store'
 
 /**
  * COMPONENT

@@ -11,9 +11,17 @@ class Card extends Component {
   render(){
     const {video, user, handleVote, userVotes } = this.props
 
-    let videoVote = userVotes.filter(vote => vote.videoId === video.id)
+    let videoVote = {
+      vote: null
+    }
+    if (userVotes.length){
+       let tempVote = userVotes.filter(vote => vote.videoId === video.id)
+       if (tempVote.length){
+         videoVote = tempVote[0]
+       }
+    }
 
-    return userVotes.length ? (
+    return (
       <div className="card container">
         <div className="row" id="cardid">
           <div className="card-image three columns">
@@ -30,15 +38,15 @@ class Card extends Component {
           </div>
             <div id="up-down-container" className="card-control three columns">
               <div id="upvote-button">
-                <button className="card-control-button" disabled={videoVote[0].vote === 'up' || null} onClick={() => handleVote(video, 1, user.id)}>↑</button>
+                <button className="card-control-button" disabled={videoVote.vote === 'up'} onClick={() => handleVote(video, 1, user.id)}>↑</button>
               </div>
               <div id="downvote-button">
-                <button className="card-control-button" disabled={videoVote[0].vote === 'down' || null} onClick={() => handleVote(video, -1, user.id)}>↓</button>
+                <button className="card-control-button" disabled={videoVote.vote === 'down'} onClick={() => handleVote(video, -1, user.id)}>↓</button>
               </div>
             </div>
         </div>
       </div>
-    ) : null
+    )
   }
 }
 
