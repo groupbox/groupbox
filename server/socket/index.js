@@ -6,19 +6,24 @@ module.exports = (io) => {
       console.log(`Connection ${socket.id} has left the building`)
     })
 
-    socket.on('new-video-added', (videoObj) => {
-      console.log('new-video-added!!!!!!', videoObj)
-      socket.broadcast.emit('new-video-added', videoObj);
+    socket.on('room-joined', (roomId) => {
+      console.log('joining room: ', roomId)
+      socket.join(roomId)
     })
 
-    socket.on('first-current-video', (videoId) => {
-      console.log('first-current-video!!!!!!', videoId)
-      socket.broadcast.emit('first-current-video', videoId);
+    socket.on('new-video-added', (video) => {
+      console.log('new-video-added: ', video)
+      socket.broadcast.to(video.roomId).emit('new-video-added', video);
+    })
+
+    socket.on('first-current-video', (video) => {
+      console.log('first-current-video: ', video)
+      socket.broadcast.to(video.roomId).emit('first-current-video', video);
     })
 
     socket.on('vote-updte', (roomId) => {
       console.log('vote-updte!!!!! - roomId: ', roomId)
-      socket.broadcast.emit('vote-updte', roomId);
+      socket.broadcast.to(roomId).emit('vote-updte', roomId);
     })
 
     socket.on('testing', (data) => {

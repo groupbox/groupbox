@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Queue from './Queue'
-import {fetchRoom, fetchVideos, fetchCurrentVideo, setCurrentVideoAction} from '../store'
+import socket from '../socket';
+import {fetchRoom, fetchVideos, fetchCurrentVideo} from '../store'
 
 /**
  * COMPONENT
@@ -18,10 +19,11 @@ class UserHome extends Component {
   componentDidMount(){
     let roomId = this.props.match.params.id
     this.props.fetchCurrentRoom(roomId)
+    socket.emit('room-joined', roomId)
   }
 
   handleClick () {
-    if(!this.state.show) {
+    if (!this.state.show) {
       this.setState({
         show: true
       })
