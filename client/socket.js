@@ -7,12 +7,12 @@ const socket = io(window.location.origin)
 socket.on('connect', () => {
   console.log('I am now connected to the server!');
 
-  socket.on('new-video-added', videoObj => {
-    store.dispatch(addVideoLinkAction(videoObj));
+  socket.on('new-video-added', video => {
+    store.dispatch(addVideoLinkAction(video));
   });
 
-  socket.on('first-current-video', videoId => {
-    store.dispatch(setCurrentVideoAction(videoId))
+  socket.on('first-current-video', video => {
+    store.dispatch(setCurrentVideoAction(video))
   })
 
   socket.on('vote-updte', (roomId) => {

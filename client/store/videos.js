@@ -54,13 +54,15 @@ export function addNewVideo(videoLink, roomId, current){
           videoObj.thumbnail = data.thumbnail_url;
           videoObj.videoId = url;
           videoObj.roomId = roomId
-          socket.emit('new-video-added', videoObj)
           return axios.post('/api/video', videoObj)
         })
         .then(res => {
           if (!current.videoId) {
             dispatch(setCurrentVideo(res.data))}
-          else {dispatch(addVideoLinkAction(res.data))}})
+          else {
+            socket.emit('new-video-added', res.data)
+            dispatch(addVideoLinkAction(res.data))}
+          })
         .catch(error => console.log(error))
     }
 }

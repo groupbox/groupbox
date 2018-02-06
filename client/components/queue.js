@@ -31,7 +31,7 @@ class Queue extends Component {
         <FlipMove duration={750}>
         {
           videos.length ? videos.map((video) => (
-            <Card key={video.id } video={video} />
+            <Card key={video.id} video={video} />
           )) : null
         }
         </FlipMove>
