@@ -8,6 +8,7 @@ router.post('/', (req, res, next) => {
 })
 
 router.get('/:id', (req, res, next) => {
+  console.log('the param id: ', req.params.id)
   Video.findAll({
     where: {
       roomId: req.params.id,

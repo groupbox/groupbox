@@ -20,6 +20,8 @@ export const setCurrentVideo = (video) => {
       axios.put('/api/video/', video)
       .catch(err => console.log('setCurrentVideo error', err))
       socket.emit('first-current-video', video)
+    } else {
+      dispatch(setCurrentVideoAction({videoId: ''}))
     }
   }
 }
@@ -28,7 +30,10 @@ export const fetchCurrentVideo = (roomId) => {
   return function(dispatch){
     axios.get(`/api/current/${roomId}`)
     .then(res => res.data)
-    .then(video => dispatch(setCurrentVideo(video)))
+    .then(video => {
+      if (video.id) dispatch(setCurrentVideo(video))
+      else dispatch(setCurrentVideo({}))
+    })
     .catch(err => console.log(err))
   }
 }
