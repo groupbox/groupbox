@@ -63,6 +63,7 @@ const mapState = (state) => {
         user: state.user,
         userVotes: state.userVotes,
         emitSkip: function(){
+          state.current.vote++
           socket.emit('skip-pressed', state.current, state.videos[0])
         }
     }
