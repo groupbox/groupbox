@@ -11,7 +11,7 @@ class UserHome extends Component {
   constructor(props){
     super(props)
     this.state = {
-      show: false
+      show: true
     }
     this.handleClick = this.handleClick.bind(this);
   }

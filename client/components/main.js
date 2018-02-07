@@ -46,6 +46,7 @@ const Main = (props) => {
     </div>
       {children}
     </div>
+
   )
 }
 

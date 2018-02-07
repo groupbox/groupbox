@@ -19,7 +19,7 @@ class Queue extends Component {
     const { addLinkToQueue, videos, currentRoom, current } = this.props;
 
     return (
-      <div className="container">
+      <div id="queue-container" className="container">
         <div className="container" id="videoplayer">
           {this.props.show ? <VideoPlayer /> : null}
         </div>
@@ -27,7 +27,7 @@ class Queue extends Component {
           <input id="videosearchinput" name="input" className="ten columns" placeholder="Paste link here..."  />
           <button id="add-video-button" type="submit">Add</button>
         </form>
-        <div>
+        <div id="cards-container">
         <FlipMove duration={750}>
         {
           videos.length ? videos.map((video) => (
