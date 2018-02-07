@@ -1,3 +1,5 @@
+const { Room } = require('../db/models')
+
 module.exports = (io) => {
   io.on('connection', (socket) => {
     console.log(`A socket connection to the server has been made: ${socket.id}`)
@@ -9,11 +11,23 @@ module.exports = (io) => {
     socket.on('room-joined', (roomId) => {
       console.log('joining room: ', roomId)
       socket.join(roomId)
+      Room.findById(roomId)
+      .then(room => {
+        room.users++
+        room.update(room.dataValues)
+      })
+      .catch(err => console.log(err))
     })
 
     socket.on('room-left', (roomId) => {
       console.log('leaving room: ', roomId)
       socket.leave(roomId)
+      Room.findById(roomId)
+      .then(room => {
+        room.users--
+        room.update(room.dataValues)
+      })
+      .catch(err => console.log(err))
     })
 
     socket.on('skip-pressed', (current, next) => {
