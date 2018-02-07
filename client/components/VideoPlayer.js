@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import store, {removeFirstVideo, setCurrentVideo, updateVideo} from '../store'
 import {connect} from 'react-redux'
 import YouTube from 'react-youtube'
+import socket from '../socket'
 
 
 class VideoPlayer extends Component {
@@ -18,21 +19,24 @@ class VideoPlayer extends Component {
     }
 
     render(){
-        const {current} = this.props
+        const {current, handleClick} = this.props
         const opts = {
             height: '390',
             width: '640',
             playerVars: {
                 autoplay: 1,
                 // controls: 0
-            }
+              }
             };
 
         return (
-                <YouTube
-                videoId={current.videoId}
-                opts={opts}
-                onEnd={this.playNext} />
+          <div>
+            <YouTube
+              videoId={current.videoId}
+              opts={opts}
+              onEnd={this.playNext} />
+            <button onClick={handleClick}>Skip</button>
+          </div>
         )
     }
 }
@@ -40,17 +44,20 @@ class VideoPlayer extends Component {
 const mapState = (state) => {
     return {
         current: state.current,
-        videos: state.videos
+        videos: state.videos,
+        handleClick: function(){
+          socket.emit('skip-pressed', state.current, state.videos[0])
+        }
     }
   }
 
   const mapDispatch = (dispatch) => {
     return {
-        setNextVideo(current, nextVideo){
+        setNextVideo(current, next){
           current.hasPlayed = true
           current.isCurrent = false
           dispatch(updateVideo(current))
-          dispatch(setCurrentVideo(nextVideo))
+          dispatch(setCurrentVideo(next))
           dispatch(removeFirstVideo())
       }
     }

@@ -9,13 +9,21 @@ module.exports = (io) => {
     socket.on('room-joined', (roomId) => {
       console.log('joining room: ', roomId)
       socket.join(roomId)
-      let room = io.sockets.adapter.rooms[roomId]
-      console.log('the room: ', room)
     })
 
     socket.on('room-left', (roomId) => {
       console.log('leaving room: ', roomId)
       socket.leave(roomId)
+    })
+
+    socket.on('skip-pressed', (current, next) => {
+      let room = io.sockets.adapter.rooms[current.roomId]
+      if (current.vote >= room.length / 2){
+        console.log('skip okay')
+        io.in(current.roomId).emit('skip-video', current, next)
+      } else {
+        console.log('no skip yet')
+      }
     })
 
     socket.on('new-video-added', (video) => {

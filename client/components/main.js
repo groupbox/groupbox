@@ -6,7 +6,7 @@ import {logout} from '../store'
 import socket from '../socket'
 
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn, handleLeave, email, currentRoom } = props
+  const {children, handleClick, isLoggedIn, handleLeave, email } = props
 
   return (
     <div>
