@@ -18,7 +18,6 @@ module.exports = (io) => {
 
     socket.on('skip-pressed', (current, next) => {
       let room = io.sockets.adapter.rooms[current.roomId]
-      console.log('current vote: ', current.vote)
       if (current.vote >= room.length / 2){
         console.log('skip okay')
         io.in(current.roomId).emit('skip-video', current, next)
