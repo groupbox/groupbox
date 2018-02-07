@@ -9,6 +9,13 @@ module.exports = (io) => {
     socket.on('room-joined', (roomId) => {
       console.log('joining room: ', roomId)
       socket.join(roomId)
+      let room = io.sockets.adapter.rooms[roomId]
+      console.log('the room: ', room)
+    })
+
+    socket.on('room-left', (roomId) => {
+      console.log('leaving room: ', roomId)
+      socket.leave(roomId)
     })
 
     socket.on('new-video-added', (video) => {

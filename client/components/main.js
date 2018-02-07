@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
+import socket from '../socket'
 
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn, email } = props
+  const {children, handleClick, isLoggedIn, handleLeave, email, currentRoom } = props
 
   return (
     <div>
@@ -23,7 +24,7 @@ const Main = (props) => {
                   <div id="logo">groupbox</div>
                 </Link>
                 <div className="nav-links">
-                  <Link to="/rooms">Rooms</Link>
+                  <Link to="/rooms" onClick={handleLeave}>Rooms</Link>
                   <a href="#" onClick={handleClick}>Logout</a>
                 </div>
             </div>
@@ -54,7 +55,11 @@ const Main = (props) => {
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
-    email: state.user.email
+    email: state.user.email,
+    currentRoom: state.currentRoom,
+    handleLeave: function(){
+      socket.emit('room-left', state.currentRoom.id)
+    }
   }
 }
 
@@ -62,7 +67,7 @@ const mapDispatch = (dispatch) => {
   return {
     handleClick () {
       dispatch(logout())
-    }
+    },
   }
 }
 
