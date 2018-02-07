@@ -4,7 +4,7 @@ const Sequelize = require('sequelize')
 const Vote = db.define('vote', {
   vote: {
     type: Sequelize.ENUM,
-    values: ['up', 'down']
+    values: ['up', 'down', 'skip']
   }
 })
 

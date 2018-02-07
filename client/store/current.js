@@ -16,6 +16,7 @@ export const setCurrentVideo = (video) => {
     if (video.videoId){
     video.hasPlayed = true
     video.isCurrent = true
+    video.vote = 0
     dispatch(setCurrentVideoAction(video))
       axios.put('/api/video/', video)
       .catch(err => console.log('setCurrentVideo error', err))
