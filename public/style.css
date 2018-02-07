@@ -3,7 +3,6 @@ body {
   background: #EAE7DC;
   color: #E85A4F;
 }
-
 #logo {
   font-weight: bold;
   font-size: 3.5em;
@@ -11,7 +10,6 @@ body {
   margin: auto;
   text-align: center;
 }
-
 .spacetext {
   color: #E85A4f;
   font-weight: bold;
@@ -19,27 +17,22 @@ body {
   align-self: flex-start;
   margin: 0.2em 0px 0.5em 0px;
 }
-
 #welcome-message {
   font-size: 1em;
   padding: 0px;
   flex-grow: 2;
 }
-
 input {
   color: #8E8D8A;;
   height: 42px;
   font-size: 30px;
 }
-
 .now-playing {
   background-color: #4b4d4f;
   padding-top: 4px;
   padding-bottom: 4px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
 }
-
-
 .card {
   width: 750px;
   padding: 7px;
@@ -48,9 +41,7 @@ input {
   box-shadow: 0 4px 8px 0 #E85A4f;
   color: #EAE7DC;
   font-size: 1.3em;
-
 }
-
 .card button {
   background-color: #E98074;
   color: #EAE7DC;
@@ -58,8 +49,6 @@ input {
   font-size: 18px;
   font-weight: bold;
 }
-
-
 .card button:hover{
   background-color: #EAE7DC;
   color: #E98074;
@@ -67,74 +56,59 @@ input {
   font-size: 20px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
 }
-
 .card button:active {
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2);
 }
-
 .card button:disabled {
   box-shadow: none;
   background-color: #E98074;
   color: #EAE7DC;
 }
-
-
 a {
   text-decoration: none;
 }
-
 label {
   display: block;
 }
-
 nav a {
   display: inline-block;
   margin: 0.5em;
   margin-bottom: 0px;
 }
-
 form div {
   margin: 1em;
   display: inline-block;
 }
-
 hr {
   background-color: #E85A4f;
   height: 1.5px;
   margin: 0px 0px 0.5em 0px;
 }
-
 h1 {
   font-size: 2em;
   text-align: center;
   margin-top: 2rem;
 }
-
 button {
   margin: 1rem;
 }
-
 .main-nav-text {
   font-family: "Raleway";
   font-size: 24px;
   padding-left: 8px;
 }
-
 .card-artist-song {
   font-size: 1.5em;
   font-weight: bold;
   text-overflow: ellipsis;
   font-family: "Raleway";
 }
-
 .card-artist-name{
   font-size: 12px;
 }
-
 #room-img {
   max-width: 60%;
 }
-
 .card img {
   max-width: 99%;
   box-sizing: border-box;
@@ -142,97 +116,77 @@ button {
   padding-top: 10px;
   margin: auto;
 }
-
 .nav-container {
   display: flex;
   flex-direction: row;
 }
-
 .nav-welcome {
   flex-grow: 1;
   margin-top: 0.8em;
 }
-
 .nav-links {
-
   float: right;
   margin-top: 0.3em;
 }
-
 #room-box {
   display: flex;
   flex-direction: column;
 }
-
 .room-box-child {
   margin: auto;
 }
-
 #create-room-box {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
 }
-
 .room-box-row {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
 }
-
 #room-box-name {
   text-align: center;
 }
-
 #join-button {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
 }
-
 .create-room-child {
   margin: auto;
   padding: 1em;
 }
-
 #create-room-button {
   padding-left: 0.2em;
 }
-
 #add-video-button {
   margin: auto;
 }
-
 #searchbar {
   display: flex;
   flex-direction: row;
   padding: 1em 0px 0px 0px;
   margin: auto;
 }
-
 #videosearchinput {
   margin: auto;
 }
-
 #room-name-container {
   display: flex;
   justify-content: space-between;
 }
-
 #videoplayer {
   margin: auto;
 }
-
 #up-down-container {
   display: flex;
   flex-direction: column;
 }
-
 #upvote-button {
   margin: auto;
 }
-
 #up-down-container button {
   background-color: white;
   color: #E85A4f;
@@ -240,37 +194,30 @@ button {
   font-size: 18px;
   font-weight: bold;
 }
-
 #up-down-container button:disabled {
   background-color: #E98074;
   border-color: white;
   color: white;
 }
-
 #downvote-button {
   margin: auto;
 }
-
 #cardid {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-
 .login-box {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
 }
-
 .login-box-child {
   margin: auto;
 }
-
 #login-button {
   margin-bottom: 0px;
 }
-
 /* The switch - the box around the slider */
 .switch {
   position: relative;
@@ -278,10 +225,8 @@ button {
   width: 60px;
   height: 34px;
 }
-
 /* Hide default HTML checkbox */
 .switch input {display:none;}
-
 /* The slider */
 .slider {
   position: absolute;
@@ -294,7 +239,6 @@ button {
   -webkit-transition: .4s;
   transition: .4s;
 }
-
 .slider:before {
   position: absolute;
   content: "";
@@ -306,25 +250,42 @@ button {
   -webkit-transition: .4s;
   transition: .4s;
 }
-
 input:checked + .slider {
   background-color: #2196F3;
 }
-
 input:focus + .slider {
   box-shadow: 0 0 1px #2196F3;
 }
-
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
-
 .slider.round {
   border-radius: 34px;
 }
-
 .slider.round:before {
   border-radius: 50%;
 }
+
+#video-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#skip-button-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#skip-button {
+  margin: auto;
+  border: 0px;
+  height: 100px;
+  width: 100px;
+}
+
+#skip-id {
+  font-size: 100px;
+}
+

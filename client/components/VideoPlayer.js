@@ -45,12 +45,15 @@ class VideoPlayer extends Component {
             };
 
         return (
-          <div>
+          <div id="video-container">
             <YouTube
               videoId={current.videoId}
               opts={opts}
               onEnd={this.playNext} />
-            <button onClick={() => this.handleSkip(current, user.id)} disabled={videoVote.vote === 'skip'}>Skip</button>
+              <div id="skip-button-container">
+                <button id="skip-button" onClick={() => this.handleSkip(current, user.id)} disabled={videoVote.vote === 'skip'}><i className="material-icons" id="skip-id">fast_forward</i>
+                </button>
+            </div>
           </div>
         )
     }
