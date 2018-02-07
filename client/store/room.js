@@ -1,9 +1,10 @@
 import axios from 'axios'
-import socket from '../socket'
 
 const GET_ROOM = 'GET_ROOM'
+const EDIT_ROOM = 'EDIT_ROOM'
 
 const getRoom = room => ({type: GET_ROOM, room})
+const editRoom = room => ({type: EDIT_ROOM, room})
 
 let initialRoom = {}
 
@@ -28,10 +29,18 @@ export const postRoom = (room, history) => {
   };
 }
 
+export const editCurrentRoom = (room) => {
+  return function(dispatch){
+    dispatch(editRoom(room))
+  }
+}
+
 
 export default function (state = initialRoom, action) {
   switch (action.type) {
     case GET_ROOM:
+      return action.room
+    case EDIT_ROOM:
       return action.room
     default:
       return state

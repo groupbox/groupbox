@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import store, {removeFirstVideo, setCurrentVideo, updateVideo} from '../store'
+import {removeFirstVideo, setCurrentVideo, updateVideo, updateVote} from '../store'
 import {connect} from 'react-redux'
 import YouTube from 'react-youtube'
+import socket from '../socket'
 
 
 class VideoPlayer extends Component {
   constructor(props){
     super(props);
-    this.state = store.getState();
-    this.playNext = this.playNext.bind(this);
+    this.state = {}
   }
 
     playNext(){
@@ -17,22 +17,41 @@ class VideoPlayer extends Component {
         }
     }
 
+    handleSkip(video, userId){
+      this.props.emitSkip()
+      this.props.handleVote(video, userId)
+    }
+
     render(){
-        const {current} = this.props
+        const {current, user, userVotes} = this.props
+
+        let videoVote = {
+          vote: null
+        }
+
+        if (userVotes.length){
+           let tempVote = userVotes.filter(vote => vote.videoId === current.id)
+           if (tempVote.length){
+             videoVote = tempVote[0]
+           }
+        }
         const opts = {
             height: '390',
             width: '640',
             playerVars: {
                 autoplay: 1,
                 // controls: 0
-            }
+              }
             };
 
         return (
-                <YouTube
-                videoId={current.videoId}
-                opts={opts}
-                onEnd={this.playNext} />
+          <div>
+            <YouTube
+              videoId={current.videoId}
+              opts={opts}
+              onEnd={this.playNext} />
+            <button onClick={() => this.handleSkip(current, user.id)} disabled={videoVote.vote === 'skip'}>Skip</button>
+          </div>
         )
     }
 }
@@ -40,18 +59,28 @@ class VideoPlayer extends Component {
 const mapState = (state) => {
     return {
         current: state.current,
-        videos: state.videos
+        videos: state.videos,
+        user: state.user,
+        userVotes: state.userVotes,
+        emitSkip: function(){
+          socket.emit('skip-pressed', state.current, state.videos[0])
+        }
     }
   }
 
   const mapDispatch = (dispatch) => {
     return {
-        setNextVideo(current, nextVideo){
+        setNextVideo(current, next){
           current.hasPlayed = true
           current.isCurrent = false
           dispatch(updateVideo(current))
-          dispatch(setCurrentVideo(nextVideo))
+          dispatch(setCurrentVideo(next))
           dispatch(removeFirstVideo())
+      },
+        handleVote(video, userId) {
+          video.vote++
+          dispatch(updateVote(userId, video.id, 'skip'))
+          dispatch(updateVideo(video))
       }
     }
   }

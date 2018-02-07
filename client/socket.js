@@ -1,11 +1,10 @@
 import io from 'socket.io-client'
-import store, {addVideoLinkAction, setCurrentVideoAction, fetchVideos} from './store'
+import store, {addVideoLinkAction, setCurrentVideoAction, fetchVideos, updateVideo, setCurrentVideo, removeFirstVideo} from './store'
 
 
 const socket = io(window.location.origin)
 
 socket.on('connect', () => {
-  console.log('I am now connected to the server!');
 
   socket.on('new-video-added', video => {
     store.dispatch(addVideoLinkAction(video));
@@ -17,6 +16,14 @@ socket.on('connect', () => {
 
   socket.on('vote-updte', (roomId) => {
     store.dispatch(fetchVideos(roomId))
+  })
+
+  socket.on('skip-video', (current, next) => {
+    current.hasPlayed = true
+    current.isCurrent = false
+    store.dispatch(updateVideo(current))
+    store.dispatch(setCurrentVideo(next))
+    store.dispatch(removeFirstVideo())
   })
 
 });
