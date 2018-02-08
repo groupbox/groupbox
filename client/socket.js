@@ -1,5 +1,5 @@
 import io from 'socket.io-client'
-import store, {addVideoLinkAction, setCurrentVideoAction, fetchVideos, updateVideo, setCurrentVideo, removeFirstVideo} from './store'
+import store, {addVideoLinkAction, setCurrentVideoAction, fetchVideos, updateVideo, setCurrentVideo, removeFirstVideo, fetchRooms} from './store'
 
 
 const socket = io(window.location.origin)
@@ -16,6 +16,10 @@ socket.on('connect', () => {
 
   socket.on('vote-updte', (roomId) => {
     store.dispatch(fetchVideos(roomId))
+  })
+
+  socket.on('newRoom', () => {
+    store.dispatch(fetchRooms())
   })
 
   socket.on('skip-video', (current, next) => {

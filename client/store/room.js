@@ -1,4 +1,5 @@
 import axios from 'axios'
+import socket from '../socket'
 
 const GET_ROOM = 'GET_ROOM'
 const EDIT_ROOM = 'EDIT_ROOM'
@@ -23,7 +24,7 @@ export const postRoom = (room, history) => {
       .then(res => res.data)
       .then(newRoom => {
         dispatch(getRoom(newRoom));
-        // ADD SOCKET EMIT EVENT HERE
+        socket.emit('newRoom');
         history.push(`/rooms/${newRoom.id}`);
       });
   };
