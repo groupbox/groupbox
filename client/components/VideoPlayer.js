@@ -9,11 +9,16 @@ class VideoPlayer extends Component {
   constructor(props){
     super(props);
     this.state = {}
+
+    this.playNext = this.playNext.bind(this)
+    this.handleSkip = this.handleSkip.bind(this)
   }
 
     playNext(){
         if (this.props.videos.length > 0) {
             this.props.setNextVideo(this.props.current, this.props.videos[0]);
+        } else {
+          this.props.setNextVideo(this.props.current, {videoId: ''})
         }
     }
 
