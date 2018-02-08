@@ -32,7 +32,7 @@ const Main = (props) => {
             {/* The navbar will show these links before you log in */}
             <div className="nav-welcome" />
                 <Link to={'/rooms'}>
-                  <div className="knockout">groupbox</div>
+                  <div id="logo">groupbox</div>
                 </Link>
             <div className="nav-links">
               <Link to="/login">Login</Link>
