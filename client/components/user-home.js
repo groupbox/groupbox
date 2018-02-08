@@ -41,10 +41,13 @@ class UserHome extends Component {
       <div className="container">
         <div id="room-name-container">
         <h1 className="spacetext">{currentRoom.name}</h1>
-        <label id="toggle-video" className="switch">
-          <input type="checkbox" />
-          <span className="slider round" onClick={this.handleClick} />
-        </label>
+        <div id="toggle-video-container">
+          <h6>{this.state.show ? "Hide Video:" : "Show Video:"}</h6>
+          <label id="toggle-video" className="switch">
+            <input type="checkbox" />
+            <span className="slider round" onClick={this.handleClick} />
+          </label>
+        </div>
         </div>
         <Queue show={this.state.show} />
       </div>
