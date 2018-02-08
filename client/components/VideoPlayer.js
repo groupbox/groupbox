@@ -23,7 +23,7 @@ class VideoPlayer extends Component {
     }
 
     render(){
-        const {current, user, userVotes} = this.props
+        const {current, user, userVotes, videos} = this.props
 
         let videoVote = {
           vote: null
@@ -51,7 +51,7 @@ class VideoPlayer extends Component {
               opts={opts}
               onEnd={this.playNext} />
               <div id="skip-button-container">
-                <button id="skip-button" onClick={() => this.handleSkip(current, user.id)} disabled={videoVote.vote === 'skip'}><i className="material-icons" id="skip-id">fast_forward</i>
+                <button id="skip-button" onClick={() => this.handleSkip(current, user.id)} disabled={videoVote.vote === 'skip' || !videos.length}><i className="material-icons" id="skip-id">fast_forward</i>
                 </button>
             </div>
           </div>
@@ -66,8 +66,10 @@ const mapState = (state) => {
         user: state.user,
         userVotes: state.userVotes,
         emitSkip: function(){
-          state.current.vote++
-          socket.emit('skip-pressed', state.current, state.videos[0])
+          if (state.current.videoId && state.videos.length){
+            state.current.vote++
+            socket.emit('skip-pressed', state.current, state.videos[0])
+          }
         }
     }
   }
