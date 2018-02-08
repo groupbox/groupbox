@@ -55,10 +55,9 @@ module.exports = (io) => {
       socket.broadcast.to(roomId).emit('vote-updte', roomId);
     })
 
-    socket.on('testing', (data) => {
-      console.log('Yaaaaaaaa testing worked!!!!!!', data)
+    socket.on('newRoom', () => {
+      console.log('got all rooms!');
+      socket.broadcast.emit('newRoom');
     })
-
-
   })
 }
